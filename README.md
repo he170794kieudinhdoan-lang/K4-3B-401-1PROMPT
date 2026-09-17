@@ -4,14 +4,14 @@
 
 ## 👥 Thành viên nhóm & Phân công vai trò
 
-**Lớp:** 3B · **Phòng:** ____ · **Cụm:** ____ · **Track:** ____
+**Lớp:** 3B · **Phòng:** E402 · **Cụm:** C2 · **Track:** 5 (E · Làn mở)
 
 | Họ và Tên | Mã Học Viên | Vai trò chính | Phần việc đảm nhiệm trong dự án |
 |---|---|---|---|
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
-|  |  |  |  |
+| Phạm Minh Hiếu | 2A202602630 | 1. Product/BA + spec | — |
+| Đỗ Việt Hoàng | 2A202602882 | 2. AI/backend | — |
+| Kiều Đình Đoàn | 2A202602936 | 3. frontend/prototype | — |
+| Đoàn Quang Thắng | 2A202602395 | 4. test + data + slide/demo + docs + form | — |
 
 > Nhóm copy nguyên file README này về repo của mình, rồi điền bảng trên. Cột **Phần việc đảm nhiệm** ghi càng cụ thể càng tốt.
 
