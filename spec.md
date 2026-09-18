@@ -331,7 +331,7 @@ Trong đó:
 
 ### §7e. Giới hạn (khai báo minh bạch)
 
-- Bản đồ, mặt bằng, điểm nước, trạng thái, mái che là dữ liệu **mô phỏng** (`simulated`); chưa có GPS / đo đạc thực địa VinUni.
+- Bản đồ, mặt bằng, điểm nước, trạng thái, mái che là dữ liệu **mô phỏng** (`simulated`); chưa có GPS / đo đạc thực địa VinUni. Data hiện chỉ cover tòa E và D + không gian ngoài trời; **các tòa khác (G, A, B...) chưa có điểm nước** trong dataset — validate R6-CP5 với user Dũng phát hiện gap này, đã note trong Changelog.
 - Golden set chấm bằng **rule-based match** (expected status + expected pointId/destination), chưa có LLM-judge cho phần natural language response.
 - Live trace hiện có **1 mẫu** — cần chạy thêm ≥ 20 mẫu live để có phân phối latency thật, sẽ bổ sung nếu kịp trước CP5.
 
@@ -372,3 +372,7 @@ Kế hoạch validation (R6, bonus): CP5 giao task “tìm điểm nước gần
 | 18/9 · CP4 | §1 Evidence: mở rộng khảo sát n=9 → **n=21**, đạt chuẩn A. Xác nhận pain **17/21 = 81%**, 7 quote nguyên văn, log CSV đầy đủ trong `evidence/`. Bảng phân bố 6 chiều (tần suất/khu vực/workaround/thời gian/số điểm biết/thông tin muốn) | Chuẩn A yêu cầu n≥20 + xác nhận ≥50% + log nguyên văn. Track E chấm evidence nghiêm hơn A–D |
 | 18/9 · CP4 | §2: đồng bộ toàn bộ số từ 7/9 → 17/21; thêm 14/21 (67%) chọn "điểm gần nhất" khớp lát cắt; 18/21 (86%) chỉ biết 0–2 điểm nước | Đồng nhất số liệu §1 ↔ §2; thêm bằng chứng "user cần công cụ" (không phải chỉ chưa biết) |
 | 18/9 · CP4 | Note giới hạn evidence trong §1: "refill / đang hoạt động" chỉ 2/21 mỗi loại → bằng chứng yếu, giữ vì quote + HAX G10 | Thành thật khai phần Form không hỗ trợ mạnh thay vì giấu; rubric thưởng minh bạch |
+| 18/9 · R6-CP5 | **Fix code:** thêm 1–2 dòng mô tả (loại điểm · uống/refill · trạng thái mẫu) cho card gợi ý kết quả trong drawer trợ lý (`codebase/campus-app.js`, `demo.html`) | User Long (CP1): *"UI hay đấy nhưng tao nghĩ thêm dòng mô tả (description)"* — user không rõ điểm nước có gì đặc biệt khi mới nhìn |
+| 18/9 · R6-CP5 | **Fix data:** khảo sát nhanh + thêm ≥ 1 điểm nước cho tòa G vào `codebase/campus-data.json`; nếu không kịp thì thêm disclaimer "data mô phỏng — hiện chỉ cover E/D" trên UI | User Tạ Quang Dũng: *"Toà G trên web đéo có điểm nước à, tao đang ở toà G vẫn thấy có mà"* — data gap so với thực tế, làm hỏng niềm tin ngay demo |
+| 18/9 · R6-CP5 | **Xác nhận giữ non-goal §4b #1** "không GPS/định vị vật lý" sau feedback user | User Nam (CP1): *"không cho người dùng pick điểm hiện tại theo gps à"* — non-goal đã lường trước; feedback này VALIDATE lựa chọn (không phải lỗi bỏ sót). Cost: 39h không đủ + GPS trong nhà lệch tầng |
+| 18/9 · R6-CP5 | **Minh bạch giới hạn model AI** trong slide demo + §7e | User Nguyễn Tuấn Thành: *"AI chatbot ngu vkl"* — hết ngân sách nâng model; nói thẳng trong pitch thay vì để giám khảo phát hiện |
