@@ -1,10 +1,10 @@
-# AI SPEC — Vmap — Tìm điểm nước/refill gần nhất tại VinUni · Nhóm 1PROMPT · Lớp 3B · Cụm C2 · Phòng E402
+# AI SPEC — Tìm điểm nước/refill gần nhất tại VinUni · Nhóm E402-C2 · Zone C2
 
 Hướng: [x] E — Làn mở (Open Lane)  [ ] A — VLearn  [ ] B — Trợ lý Học viên  [ ] C — Lesson Studio  [ ] D — Học tập thích ứng
 
 Loại: [ ] Tối ưu tính năng có sẵn  [x] Tính năng mới
 
-Nguồn CP1: Canvas *Vmap — Find Water. Keep Learning.* (Track E). Mục §1–§2 bên dưới là bản chuyển Canvas vào spec; số liệu khảo sát và quote nguyên văn **đã đạt chuẩn A tại CP4** (n=21, 17/21 xác nhận pain, 7 quote — log trong `evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`).
+Nguồn CP1: Canvas *Vmap — Find Water. Keep Learning.* (Track E). Mục §1–§2 bên dưới là bản chuyển Canvas vào spec; số liệu khảo sát và quote nguyên văn **chưa đủ chuẩn A/B**, sẽ bổ sung trước CP4.
 
 ---
 
@@ -32,69 +32,34 @@ Khi đang học hoặc sinh hoạt tại VinUni và hết nước / khát, tôi 
 
 Học viên AI20k khi cần lấy/refill nước tại VinUni đôi khi không biết điểm nước ở đâu, hoặc điểm nào gần vị trí hiện tại, nên phải hỏi người khác hoặc mất thời gian tự tìm — đứt mạch học tập và sinh hoạt.
 
-### Evidence (chuẩn A — log đầy đủ trong repo)
+### Evidence (chuẩn A và/hoặc B — log đầy đủ trong repo)
 
-**Trạng thái CP4:** **Đã đạt chuẩn A.** Khảo sát mở rộng 17/9 → 18/9 qua Google Form + phỏng vấn nhanh, log nguyên văn trong `evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`. Track E chấm evidence nghiêm hơn A–D — số dưới đây kiểm lại được bằng cách đếm dòng CSV.
+**Trạng thái CP1:** mới có *mầm* evidence. **Chưa đạt** chuẩn A (khảo sát ≥20 người ngoài nhóm, ≥50% xác nhận, log nguyên văn) và **chưa đạt** chuẩn B (số mining đếm được + ≥5 ví dụ nguyên văn + phương pháp đếm). Track E chấm evidence nghiêm hơn A–D — mục này phải đủ trước hạn chốt spec (CP4, 21:00 18/9).
 
-**Nguồn CSV:** [`evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`](evidence/Kh%E1%BA%A3o_s%C3%A1t_tr%E1%BA%A3i_nghi%E1%BB%87m_t%C3%ACm_khu_v%E1%BB%B12026-09-18_06_44_07.csv) — 21 phiếu, 12 câu hỏi/phiếu.
-
-**Cách đếm (reproducible):** Filter dòng có Q1 = "Có" (học viên AI20k tại VinUni) → **n = 21** hợp lệ. Đếm tay trên CSV; ai chạy pandas ra khác → sửa dòng này, không làm tròn.
-
-#### Bảng tổng hợp — chuẩn A
-
-| Chỉ số | Kết quả | Ngưỡng chuẩn A | Đạt? |
-|---|---|---|---|
-| Sample size (n) | **21** | ≥ 20 | ✅ |
-| Xác nhận pain (Q2 = Có) | **17/21 = 81%** | ≥ 50% | ✅ |
-| Số quote nguyên văn phân biệt | **7** (xem dưới) | ≥ 5 | ✅ |
-| Log nguyên văn trong repo | CSV ở `evidence/` | có file | ✅ |
-
-#### Phân bố chi tiết (n = 21, trong 17 người xác nhận pain khi có nghĩa)
-
-| Chiều | Phân bố |
-|---|---|
-| **Tần suất** (trong 17 confirmed) | Khá thường xuyên: **5** · Thỉnh thoảng: **10** · Chỉ 1 lần: **2** |
-| **Khu vực gần nhất khi cần nước** (n=21) | Phòng học: **9 (43%)** · Sảnh/hành lang: **4** · Thư viện: **3** · Ngoài trời: **2** · Auditorium: **2** · Khu thể thao: **1** |
-| **Workaround hiện tại** (multi-select) | Tự đi tìm: **9** · Đi mua nước: **8** · Hỏi bạn: **5** · Hỏi bảo vệ: **4** |
-| **Thời gian tìm được** (trong 17 confirmed) | 1–3 phút: **6** · 3–5 phút: **6** · **Trên 5 phút: 5/17 (29%)** |
-| **Số điểm nước hiện biết** (n=21) | 0: **3** · 1: **7** · 2: **8** · 3+: **3** → **18/21 (86%) chỉ biết 0–2 điểm** |
-| **Thông tin muốn nhất** (multi-select) | **Điểm nước gần nhất: 14/21 (67%)** · Tầng/khu vực: 3 · Khoảng cách/thời gian: 3 · Landmark: 2 · Có refill được?: 2 · Đang hoạt động?: 2 |
-| **Sẵn sàng test prototype** | **Có: 8/21 (38%)** · Không: 13/21. Đã để lại contact: 2 (`discord_user_123`, `ai_learner_99`) — cần follow up thêm 1 người để đạt willing user ≥ 3 với contact công khai |
-
-#### Quote nguyên văn (Q7 "chỗ khó nhất" + Q10 "cải thiện gì")
-
-Từ CSV, ≥ 5 quote phân biệt (con số trong ngoặc = số phiếu ghi đúng cụm này):
-
-1. *"Không biết điểm nước nằm ở đâu"* — **×10**
-2. *"Thiếu / khó thấy biển chỉ dẫn"* — **×6**
-3. *"Campus rộng, khó định hướng"* — **×5**
-4. *"Không biết điểm nào gần nhất"* — **×4**
-5. *"Không biết điểm nước có đang sử dụng được không"* — **×2**
-6. *"Thêm biển báo chỉ dẫn"* (Q10, phiếu 12) — cải thiện mong muốn
-7. *"Cần có bản đồ rõ ràng hơn"* (Q10, phiếu 18) — cải thiện mong muốn
-
-#### Nguồn bổ trợ (còn thiếu, không blocker CP4)
-
-| Nguồn | Đã có | Còn thiếu |
+| Nguồn (Canvas dòng 4) | Đã có | Còn thiếu |
 |---|---|---|
-| Quan sát thực địa điểm nước tại VinUni | Chưa có bản ghi từng điểm; data campus trong `codebase/campus-data.json` là mô phỏng | Bản ghi từng điểm (tòa · tầng · loại: uống/refill · đang hoạt động?) — nếu kịp thì bổ sung CP5 |
-| Willing users cho R6 | 3 tên (canvas §6) đã đồng ý miệng + 2 discord contact từ Form | Xác nhận lịch test CP5 với ≥ 2/3 người |
+| Khảo sát học viên AI20k (Google Form + phỏng vấn nhanh) về trải nghiệm tìm khu vực nước uống | **n = 9** (17/9, đếm tay trên sheet) · **7/9 (78%)** từng không biết điểm nước | n ≥ 20 · log nguyên văn từng phiếu trong repo · file CSV |
+| Quan sát thực tế một số tòa nhà VinUni: vị trí, tình trạng, khả năng tiếp cận điểm nước | Chưa có bản ghi điểm | Bản ghi từng điểm (tòa · tầng · loại: uống / refill · đang hoạt động?) |
+| Willing users | 3 tên thật đã đồng ý | Dùng thử prototype lúc CP5 (R6) |
 
-**Ràng buộc lock chốt CP4:** n = 21, 81% xác nhận pain → **không phải chọn lại ứng viên**. Nếu phiếu mới nộp thêm sau CP4, ghi vào §9 Changelog, không xoay chuẩn "đạt".
+- Số liệu mining / kết quả khảo sát: **mầm:** n = 9 · 7/9 xác nhận pain · ≥3/9 mất >5 phút mỗi lần tìm. **Chưa chuẩn A.**
+- Quote mở trên sheet (chưa gắn mã HV): *“Thiếu / khó thấy biển chỉ dẫn”* · *“Campus rộng, khó định hướng”* · *“Không biết điểm nào gần nhất”* · *“Không biết điểm nước có đang sử dụng được”*. Cần ≥1 quote nữa + nguồn phiếu để đủ 5.
+
+**Việc phải ghi vào file nháp (trước CP4):** nhật ký câu hỏi · câu trả lời nguyên văn · n · số người xác nhận pain · quy tắc đếm nếu có mining.
 
 ---
 
 ## §2. Impact & quyết định chọn
 
-Canvas CP1 chốt hướng tìm/refill nước. Bảng dưới so ≥3 ứng viên. Số #1 lấy từ Form 17–18/9 (n = 21, log trong `evidence/`); #2/#3 chưa có mẫu song song, chỉ có tín hiệu trong Discord khoá 4.
+Canvas CP1 chốt hướng tìm/refill nước. Bảng dưới so ≥3 ứng viên. Số #1 lấy từ Form 17/9 (n = 9); #2/#3 chưa có mẫu song song.
 
 ### Bảng impact ≥3 ứng viên
 
 | # | Ứng viên (job / pain) | Bao nhiêu người gặp | Tần suất | Mỗi lần tốn gì | Build nổi trong sự kiện? | Chọn? |
 |---|---|---|---|---|---|---|
-| 1 | Tìm điểm lấy/refill nước gần vị trí đang học | Form n=21: **17/21 (81%)** HV AI20k từng không biết điểm nước. **86% (18/21) chỉ biết 0–2 điểm** | Trong 17 confirmed: khá thường 5 · thỉnh thoảng 10 · chỉ 1 lần 2 | Đi mua (8) / tự tìm (9) / hỏi bạn (5) / hỏi bảo vệ (4); **5/17 (29%) mất >5 phút** | Có — 1 user · 1 việc · data điểm nước mô phỏng đã xác minh | **Chọn (CP4, chuẩn A)** |
-| 2 | Tìm vị trí thư viện / bị lạc đường giữa các tòa | Có tín hiệu trong bản tin Discord khoá 4 (hỏi thư viện vì lạc đường) — chưa đếm trên `k4_messages.csv` | Cao tuần onboarding, giảm khi đã quen campus | Thời gian hỏi kênh / chờ reply; trễ buổi học | Có, nhưng gần với "bản đồ campus" hơn là một quyết định hẹp | Loại (CP4) |
-| 3 | Tìm đúng phòng lab / xử lý ngồi nhầm phòng | Có tín hiệu trong bản tin Discord (ngồi nhầm phòng lab) — chưa đếm | Tập trung buổi lab, không phải mọi giờ học | Trễ điểm danh / trễ lab; hỏi BTC/Mod | Khả thi nhưng dính lịch/phòng — dữ liệu đổi theo tuần, khó xác minh tại chỗ | Loại (CP4) |
+| 1 | Tìm điểm lấy/refill nước gần vị trí đang học | Form 17/9: **7/9** HV AI20k từng không biết điểm nước (78%). Chưa đủ n=20 | Trong 9 phiếu: khá thường 3 · thỉnh thoảng ≥3 · chỉ 1 lần 1 | Đi mua / tự tìm / hỏi bạn hoặc bảo vệ; **≥3/9 mất >5 phút**, ≥2/9 mất 3–5 phút | Có — 1 user · 1 việc · data điểm nước quan sát được | **Chọn (CP1, mầm số)** |
+| 2 | Tìm vị trí thư viện / bị lạc đường giữa các tòa | Có tín hiệu trong bản tin Discord khoá 4 (hỏi thư viện vì lạc đường) — chưa đếm trên `k4_messages.csv` | Cao tuần onboarding, giảm khi đã quen campus | Thời gian hỏi kênh / chờ reply; trễ buổi học | Có, nhưng gần với “bản đồ campus” hơn là một quyết định hẹp | Loại tạm (CP1) |
+| 3 | Tìm đúng phòng lab / xử lý ngồi nhầm phòng | Có tín hiệu trong bản tin Discord (ngồi nhầm phòng lab) — chưa đếm | Tập trung buổi lab, không phải mọi giờ học | Trễ điểm danh / trễ lab; hỏi BTC/Mod | Khả thi nhưng dính lịch/phòng — dữ liệu đổi theo tuần, khó xác minh tại chỗ | Loại tạm (CP1) |
 
 ### Ứng viên ĐÃ LOẠI + vì sao
 
@@ -105,30 +70,29 @@ Canvas CP1 chốt hướng tìm/refill nước. Bảng dưới so ≥3 ứng vi�
 
 **Chọn #1 — tìm/refill nước tại VinUni.**
 
-**Cách đếm (kiểm lại được):** đếm tay trên CSV `evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`.
-- Filter dòng có Q1 = "Có" (học viên AI20k tại VinUni) → **n = 21** hợp lệ.
-- Xác nhận pain: Q2 = "Có" (đã từng cần tìm nơi lấy/refill nước nhưng không biết ở đâu) → **17/21 (81%)**.
-- **Đạt chuẩn A** (n ≥ 20, xác nhận ≥ 50%). Nếu chạy pandas ra số khác → sửa dòng này, không làm tròn cho đẹp.
+**Cách đếm (kiểm lại được):** Google Form 17/9, đếm tay trên sheet nhóm (chưa file CSV trong repo).  
+- Mẫu: dòng trả **Có** ở câu “học viên AI20k đang học tại VinUni” → **n = 9**.  
+- Xác nhận pain: **Có** ở câu “đã từng cần tìm nơi lấy/refill nước nhưng không biết ở đâu” → **7/9 (78%)**.  
+- Chưa đạt chuẩn A (cần ≥20). Nếu export CSV ra số khác, sửa dòng này — không làm tròn cho đẹp.
 
 **So với #2 và #3 trên cùng thước đo:**
 
-| | #1 Điểm nước (Form n=21) | #2 Thư viện / lạc tòa | #3 Nhầm phòng lab |
+| | #1 Điểm nước (Form) | #2 Thư viện / lạc tòa | #3 Nhầm phòng lab |
 |---|---|---|---|
-| Người gặp | **17/21 (81%)** từng không biết điểm nước | 0 câu Form hỏi việc này; chỉ 1 tín hiệu bản tin Discord | 0 câu Form; 1 tín hiệu Discord |
-| Tần suất (trong confirmed) | Khá thường **5/17** · thỉnh thoảng **10/17** · chỉ 1 lần **2/17** | Chủ yếu tuần onboarding | Theo buổi lab |
-| Mỗi lần tốn | **5/17 (29%) mất >5 phút**; 6/17 mất 3–5 phút; workaround: tự tìm (9), đi mua (8), hỏi bạn (5), hỏi bảo vệ (4) | Chờ reply / hỏi kênh | Trễ lab / hỏi BTC |
+| Người gặp (mẫu này) | **7/9** từng không biết điểm nước | 0 câu Form hỏi việc này; chỉ 1 tín hiệu bản tin Discord | 0 câu Form; 1 tín hiệu Discord |
+| Tần suất | Khá thường **3/9** · thỉnh thoảng nhiều phiếu · chỉ 1 lần **1/9** | Chủ yếu tuần onboarding | Theo buổi lab |
+| Mỗi lần tốn | **≥3/9 >5 phút**; ≥2/9 mất 3–5 phút; workaround: đi mua, tự tìm, hỏi bạn/bảo vệ | Chờ reply / hỏi kênh | Trễ lab / hỏi BTC |
 | Build 3 buổi | Có | Có nhưng thành bản đồ tĩnh | Dính lịch phòng, data đổi |
-| Muốn thông tin gì | **14/21 (67%) chọn "điểm gần nhất"** — khớp lát cắt | — | — |
 
-**Vì sao chọn #1 bằng số:** với n=21 đạt chuẩn A, pain nước **đo được 81%** cao hơn ngưỡng rubric (50%) và có phân bố thời gian rõ; #2/#3 chưa có mẫu Form song song. Đa số phiếu chọn thông tin hữu ích là **điểm nước gần nhất** — khớp trực tiếp với lát cắt AI đã chọn.
+**Vì sao chọn #1 bằng số hiện có:** cùng n=9, pain nước **đo được 78%** và có phân bố thời gian; #2/#3 **chưa có mẫu song song**. Đa số phiếu chọn thông tin hữu ích là **điểm nước gần nhất** (khớp lát cắt).
 
-**Đã khóa tại CP4** (không xoay chuẩn "đạt" nữa).
+**Chưa được khóa sau CP4:** n < 20. Nếu Form đủ ≥20 mà xác nhận pain **< 50%**, chọn lại ứng viên.
 
-Giả định / phần chưa chắc:
+Giả định còn mở:
 
-- 4/21 trả Không ở Q2 — có thể biết chỗ rồi (2 phiếu biết 2 điểm, 1 phiếu biết 3+ điểm), hoặc ít khi lấy nước tại campus.
-- Tiêu chí "gần nhất" (14/21) áp đảo; **refill / đang hoạt động chỉ 2/21 mỗi loại** — nghĩa là ràng buộc "trạng thái điểm" chỉ có bằng chứng yếu trên Form. Thiết kế vẫn giữ vì các quote (dòng #5) và HAX G10 yêu cầu kiểm tra trước khi đề xuất.
-- Số vị trí đang nhớ: **18/21 (86%) biết 0–2 điểm**; chỉ 3/21 biết ≥ 3 điểm → nhu cầu công cụ hỗ trợ là có thật, không phải người dùng đã biết rồi mà lười.
+- 2/9 trả Không (chưa từng lạc điểm nước) — có thể biết chỗ rồi, hoặc ít khi lấy nước tại campus.
+- Tiêu chí “gần nhất” thắng trên Form; refill / đang hoạt động chỉ xuất hiện ở 1 phiếu (Sảnh, biết ≥3 điểm).
+- Số vị trí đang nhớ: nhiều phiếu **0–2** điểm quanh chỗ học; 1 phiếu **≥3**.
 
 ---
 
@@ -369,6 +333,3 @@ Kế hoạch validation (R6, bonus): CP5 giao task “tìm điểm nước gần
 | 18/9 · CP4 | §5: mở rộng bảng 4 lớp lỗi từ 10 → 14 kịch bản, mỗi kịch bản gắn case ID trong `eval/cases.json` | Yêu cầu ≥8 kịch bản; kết nối trực tiếp golden set để kiểm chứng |
 | 18/9 · CP4 | §6: cấu trúc lại thành 4 nhánh chính rõ ràng (Happy / Low-conf / Failure / Correction) + 2 nhánh phụ (Out-of-scope / Domain) | Rubric §6 yêu cầu **4 nhánh trải nghiệm**; trước đó viết 6 gạch đầu dòng không phân biệt chính/phụ |
 | 18/9 · CP4 | §7: thêm bảng 6 chiều chất lượng (Q1–Q6) + công thức QualityScore định lượng (0.92 threshold) + khai báo giới hạn | Rubric §7 yêu cầu định nghĩa test **theo từng chiều**, liên kết `eval/`, và công thức Quality Bar định lượng — trước CP4 chỉ có 1 dòng liệt kê |
-| 18/9 · CP4 | §1 Evidence: mở rộng khảo sát n=9 → **n=21**, đạt chuẩn A. Xác nhận pain **17/21 = 81%**, 7 quote nguyên văn, log CSV đầy đủ trong `evidence/`. Bảng phân bố 6 chiều (tần suất/khu vực/workaround/thời gian/số điểm biết/thông tin muốn) | Chuẩn A yêu cầu n≥20 + xác nhận ≥50% + log nguyên văn. Track E chấm evidence nghiêm hơn A–D |
-| 18/9 · CP4 | §2: đồng bộ toàn bộ số từ 7/9 → 17/21; thêm 14/21 (67%) chọn "điểm gần nhất" khớp lát cắt; 18/21 (86%) chỉ biết 0–2 điểm nước | Đồng nhất số liệu §1 ↔ §2; thêm bằng chứng "user cần công cụ" (không phải chỉ chưa biết) |
-| 18/9 · CP4 | Note giới hạn evidence trong §1: "refill / đang hoạt động" chỉ 2/21 mỗi loại → bằng chứng yếu, giữ vì quote + HAX G10 | Thành thật khai phần Form không hỗ trợ mạnh thay vì giấu; rubric thưởng minh bạch |
