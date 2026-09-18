@@ -9,7 +9,8 @@ const state = {
   weatherContext:{condition:'unknown',sourceType:'user',source:'Theo bạn cung cấp'}, excludedPointIds:[],
   contextVersion:0, positionRevision:0, pendingClarification:null,
   showAssistant:false, query:'', answer:'', notice:'', busy:false, actions:[],
-  trace:null, providerMode:'unconfigured', confirmation:null, proposedRoute:null
+  trace:null, providerMode:'unconfigured', confirmation:null, proposedRoute:null,
+  chatHistory:[]
 };
 let requestNumber=0, controller=null, motion=0, frameId=null, lastFrame=null, pointerId=null;
 const heldKeys=new Set();
@@ -77,7 +78,7 @@ function find(){
 }
 function tick(now){
   frameId=null;
-  if(!motion || state.showAssistant || !state.journey)return;
+  if(!motion || !state.journey)return;
   const elapsed=lastFrame===null?0:Math.min(50,Math.max(0,now-lastFrame));lastFrame=now;
   if(elapsed){
     N.advance(state.journey,motion*elapsed*.10);syncPosition();
@@ -88,7 +89,7 @@ function tick(now){
   if(motion)frameId=window.requestAnimationFrame(tick);
 }
 function startMotion(direction){
-  if(!state.journey || state.showAssistant || state.busy || state.confirmation)return;
+  if(!state.journey || state.busy || state.confirmation)return;
   if(motion && motion!==direction){stop();return;}
   if(state.journey.pending)return;
   if(done() && direction>0)return;
@@ -114,10 +115,14 @@ function centerPlayer(){
   if(!state.follow)return;
   const viewport=document.getElementById('viewport'),svg=viewport?.querySelector('svg'),point=coords();
   if(!viewport || !svg || point.floor!==state.floor)return;
-  // Camera lives in SVG coordinates: follow works even at zoom 1, without
-  // clamping the person to the edge of a non-scrollable viewport.
+  if(state.zoom<=1 && !state.walking){
+    svg.setAttribute('viewBox','0 0 1126 906');
+    return;
+  }
   const width=1126/state.zoom,height=906/state.zoom;
-  svg.setAttribute('viewBox',`${point.x-width/2} ${point.y-height*.46} ${width} ${height}`);
+  const minX=Math.max(0,Math.min(1126-width,point.x-width/2));
+  const minY=Math.max(0,Math.min(906-height,point.y-height*.46));
+  svg.setAttribute('viewBox',`${minX} ${minY} ${width} ${height}`);
 }
 function updateMotionUI(){
   const point=coords(),marker=app.querySelector('[data-player]');
@@ -141,6 +146,7 @@ async function ask(query,action){
   if(state.busy)return;
   query=String(query||'').trim();if(!query&&!action)return;
   state.showAssistant=true;state.query=query;state.busy=true;state.actions=[];state.trace=null;state.notice='';
+  if(query)state.chatHistory.push({role:'user',text:query});
   const version=state.contextVersion,revision=state.positionRevision,id=++requestNumber;
   const requestId='turn-'+id;
   controller=new AbortController();
@@ -154,6 +160,7 @@ async function ask(query,action){
     if(id!==requestNumber || version!==state.contextVersion || revision!==state.positionRevision)return;
     if(data.requestId!==requestId || data.contextVersion!==version)throw Error('Phản hồi không khớp lượt hỏi.');
     state.answer=String(data.message || 'Chưa nhận được câu trả lời.');state.actions=Array.isArray(data.actions)?data.actions:[];
+    state.chatHistory.push({role:'assistant',text:state.answer});
     state.providerMode=data.providerMode || 'unconfigured';state.trace=data.trace || null;
     const patch=data.contextPatch || {};
     // Only known state keys; server confirmation paths remain explicit.
@@ -173,6 +180,7 @@ async function ask(query,action){
   }catch(error){
     if(id!==requestNumber || version!==state.contextVersion)return;
     state.answer=error.name==='AbortError'?'Yêu cầu quá thời gian. Hãy thử lại.':'Không kết nối được trợ lý. Hãy chạy máy chủ backend và kiểm tra cấu hình AI.';
+    state.chatHistory.push({role:'assistant',text:state.answer});
     state.notice='Chỉ đường thủ công vẫn hoạt động với dữ liệu mẫu.';state.actions=[{type:'retry'}];
   }finally{
     window.clearTimeout(timeout);
@@ -195,51 +203,66 @@ function render(){
   const pending=state.journey?.pending,complete=done();
   const nodeOptions=Object.keys(M.nodes).filter(id=>M.starts.includes(id)||id==='d_entrance'||M.nodes[id].floor!=='campus');
   const routeTitle=state.route?label(state.route.destinationId):state.destinationId==='water'?'Tìm điểm nước':'Đến cửa tòa D';
-  app.innerHTML=`<main class="gmaps-container">
-    <div class="gmaps-top-overlay">
-      <div class="gmaps-search-bar"><div class="search-brand">💧 Vmap</div><span class="simulation-label">Mô phỏng · dữ liệu mẫu</span><button class="search-icon-btn" data-action="chat" aria-label="Mở chat với trợ lý">💬</button></div>
-      <div class="gmaps-chips-bar" aria-label="Tầng đang xem">${['campus','1','2'].map(f=>`<button data-floor="${f}" class="g-chip ${state.floor===f?'active':''}" aria-pressed="${state.floor===f}">${floorLabel(f)}</button>`).join('')}</div>
-      <div class="view-caption">Đang xem: ${floorLabel(state.floor)} · Vị trí: ${esc(currentLabel())}</div>
-    </div>
-    <div class="gmaps-viewport" id="viewport"><div class="map-canvas" style="width:${state.follow?100:state.zoom*100}%;height:${state.follow?100:state.zoom*100}%">${M.render({floor:state.floor,position:state.position,route:state.route,journey:state.journey,path:state.route?.nodeIds||[],zoom:1})}</div></div>
-    <div class="gmaps-fabs"><button data-action="follow" class="g-fab primary" aria-label="Căn giữa vị trí hiện tại">◎</button><button data-action="zoom" class="g-fab" aria-label="Phóng to">+</button><button data-action="out" class="g-fab" aria-label="Thu nhỏ">−</button></div>
-    <section class="gmaps-bottom-sheet" aria-label="Hành trình">
-      <div class="sheet-handle"></div><div class="sheet-content">
-        <div class="place-title-row"><h1 class="place-name">${esc(routeTitle)}</h1><button class="g-secondary-btn" data-action="chat">Hỏi trợ lý</button></div>
-        ${state.journey?`<p id="next-instruction" class="next-instruction">${esc(instruction())}</p><div class="g-progress-bar"><span id="route-progress" style="width:${progress()}%"></span></div>
-          <div class="g-btn-row"><button class="g-secondary-btn movement-button" data-motion="-1" ${pending?'disabled':''}>↓ Quay lại</button><button class="g-primary-btn movement-button" data-motion="1" ${pending||complete?'disabled':''}>↑ Giữ Đi tiếp</button></div>
-          ${pending?`<button class="g-primary-btn" data-action="confirm-stop">${esc(pending.label||'Xác nhận để tiếp tục')}</button>`:''}
-          <p class="control-help">Giữ nút hoặc phím ↑ / ↓; thả để dừng. Vị trí là mô phỏng, không phải GPS.</p>
-          <div class="g-btn-row"><button class="g-secondary-btn" data-action="stop-route">Dừng dẫn đường</button><button class="g-secondary-btn" data-action="report">Báo điểm hỏng</button></div>
-        `:`<label class="field-label">Bạn đang ở đâu?<select id="origin" class="trip-select"><option value="" ${!state.positionConfirmed?'selected':''}>Chọn vị trí xuất phát</option>${nodeOptions.map(id=>`<option value="${id}" ${state.positionConfirmed&&state.position.nodeId===id?'selected':''}>${esc(label(id))}</option>`).join('')}${state.position.kind==='edge'?'<option value="current" selected>Giữ vị trí giữa đoạn đường hiện tại</option>':''}</select></label>
-          <div class="trip-grid"><label class="field-label">Điểm đến<select id="destination" class="trip-select"><option value="water" ${state.destinationId==='water'?'selected':''}>Điểm nước gần nhất trong dữ liệu mẫu</option><option value="d_entrance" ${state.destinationId==='d_entrance'?'selected':''}>Cửa tòa D</option></select></label>
-          <label class="field-label">Thời tiết bạn báo<select id="weather" class="trip-select">${[['unknown','Chưa rõ'],['rain','Đang mưa'],['dry','Không mưa']].map(([id,text])=>`<option value="${id}" ${state.weatherContext.condition===id?'selected':''}>${text}</option>`).join('')}</select></label></div>
-          <label class="field-label">Chọn đường<select id="preference" class="trip-select">${Object.entries(preferences).map(([id,text])=>`<option value="${id}" ${state.routePreference===id?'selected':''}>${text}</option>`).join('')}</select></label>
-          ${state.destinationId!=='water'?`<label class="checkbox-label"><input type="checkbox" id="via-water" ${state.viaWater?'checked':''}> Ghé lấy nước trước khi đến D</label>`:''}
-          <button class="g-primary-btn" data-action="find">Bắt đầu chỉ đường ↗</button>
-        `}
-        ${state.route?`<p class="route-evidence">${esc(preferences[state.route.preference||state.routePreference])} · ${state.route.waypointIds?.length?'Có điểm ghé lấy nước · ':''}Đường và mái che chưa xác minh thực địa. ${Number(state.route.exposureSummary?.exposed)>0?'Tuyến còn đoạn ngoài trời không mái che.':''}</p>`:''}
-        <p class="weather-source">Thời tiết: ${{rain:'mưa',dry:'không mưa',unknown:'chưa rõ'}[state.weatherContext.condition]||'chưa rõ'} · nguồn: bạn cung cấp; chưa có dự báo trực tiếp.</p>
-        ${state.confirmation?`<div class="confirmation-box"><p>${esc(state.confirmation.message)}</p>${state.confirmation.type==='report_select'?pointOptions().map(p=>`<button class="g-secondary-btn" data-report-point="${esc(p.id)}">${esc(p.label||label(p.nodeId))}</button>`).join(''):'<button class="g-primary-btn" data-action="confirm-local">Xác nhận</button>'}<button class="g-secondary-btn" data-action="cancel-local">Hủy</button></div>`:''}
-        ${state.notice?`<p class="inline-notice" role="status">${esc(state.notice)}</p>`:''}
+  app.innerHTML=`<main class="gmaps-container split-layout">
+    <div class="split-left">
+      <div class="gmaps-top-overlay">
+        <div class="gmaps-search-bar"><div class="search-brand">💧 Vmap</div><span class="simulation-label">Mô phỏng · dữ liệu mẫu</span></div>
+        <div class="gmaps-chips-bar" aria-label="Tầng đang xem">${['campus','1','2'].map(f=>`<button data-floor="${f}" class="g-chip ${state.floor===f?'active':''}" aria-pressed="${state.floor===f}">${floorLabel(f)}</button>`).join('')}</div>
+        <div class="view-caption">Đang xem: ${floorLabel(state.floor)} · Vị trí: ${esc(currentLabel())}</div>
       </div>
-    </section>
-    <div class="assistant-backdrop ${state.showAssistant?'':'hidden'}"><section class="assistant-drawer" role="dialog" aria-modal="true" aria-label="Trợ lý Vmap">
-      <div class="assistant-header"><div class="assistant-logo">Trợ lý Vmap</div><button class="assistant-close-btn" data-action="close-chat" aria-label="Đóng chat">✕</button></div>
-      <p class="provider-label">${state.providerMode==='live'?'Phản hồi qua model AI':state.providerMode==='mock'?'Chế độ kiểm thử mô phỏng — không phải AI thật':'AI cần backend và cấu hình model'} · bản đồ mẫu</p>
-      <div class="assistant-dialog-body">
-        ${state.query?`<div class="assistant-bubble user">${esc(state.query)}</div>`:''}
-        <div class="assistant-bubble" role="status">${state.busy?'Đang xử lý yêu cầu…':esc(state.answer||'Tôi hỗ trợ tìm nước, tới cửa tòa D, chọn đường tránh mưa và hướng dẫn chặng tiếp theo. Bạn có thể sửa vị trí hoặc báo điểm nước hỏng.')}</div>
-        <div class="assistant-suggestions">${state.busy?'':chatActions()}</div>
-        <div class="assistant-suggestions"><button class="sugg-chip" data-action="ask-next" ${state.busy?'disabled':''}>Giờ đi đâu tiếp?</button><button class="sugg-chip" data-action="ask-water" ${state.busy?'disabled':''}>Tìm nước giúp tôi</button><button class="sugg-chip" data-action="report" ${state.busy?'disabled':''}>Báo điểm hỏng</button></div>
-        <form id="ask" class="assistant-form"><label class="sr-only" for="question">Nội dung hỏi trợ lý</label><input id="question" class="assistant-input" maxlength="500" placeholder="Ví dụ: trời mưa, lát tôi học tòa D" ${state.busy?'disabled':''}><button class="assistant-submit-btn" ${state.busy?'disabled':''}>Gửi</button></form>
-        <button class="g-secondary-btn" data-action="close-chat">Dùng các nút chỉ đường thủ công</button>
-        ${state.trace?`<details class="trace-panel"><summary>Công cụ và kết quả xử lý</summary><pre>${esc(JSON.stringify(state.trace,null,2))}</pre></details>`:''}
-      </div></section></div>
+      <div class="gmaps-viewport" id="viewport"><div class="map-canvas" style="width:${state.follow?100:state.zoom*100}%;height:${state.follow?100:state.zoom*100}%">${M.render({floor:state.floor,position:state.position,route:state.route,journey:state.journey,path:state.route?.nodeIds||[],zoom:1})}</div></div>
+      <div class="gmaps-fabs"><button data-action="follow" class="g-fab primary" aria-label="Căn giữa vị trí hiện tại">◎</button><button data-action="zoom" class="g-fab" aria-label="Phóng to">+</button><button data-action="out" class="g-fab" aria-label="Thu nhỏ">−</button></div>
+    </div>
+    <aside class="split-right" aria-label="Điều khiển và trò chuyện">
+      <div class="panel-header">
+        <div class="panel-brand"><span class="panel-brand-icon">↗</span> vmap<span class="panel-dot">.</span></div>
+        <span class="panel-badge">DEMO</span>
+      </div>
+      <div class="right-panel-scroll">
+        <div class="right-section right-controls">
+          <div class="section-label"><span class="section-icon">🧭</span> Hành trình</div>
+          <h2 class="right-section-title">${esc(routeTitle)}</h2>
+          ${state.journey?`<p id="next-instruction" class="next-instruction">${esc(instruction())}</p><div class="g-progress-bar"><span id="route-progress" style="width:${progress()}%"></span></div>
+            <div class="g-btn-row"><button class="g-secondary-btn movement-button" data-motion="-1" ${pending?'disabled':''}>↓ Quay lại</button><button class="g-primary-btn navigating movement-button" data-motion="1" ${pending||complete?'disabled':''}>↑ Giữ Đi tiếp</button></div>
+            ${pending?`<button class="g-primary-btn" data-action="confirm-stop">${esc(pending.label||'Xác nhận để tiếp tục')}</button>`:''}
+            <p class="control-help">Giữ nút hoặc phím ↑ / ↓; thả để dừng.</p>
+            <div class="g-btn-row"><button class="g-secondary-btn" data-action="stop-route">Dừng dẫn đường</button><button class="g-secondary-btn" data-action="report">Báo điểm hỏng</button></div>
+          `:`<div class="controls-form">
+            <label class="field-label">Bạn đang ở đâu?<select id="origin" class="trip-select"><option value="" ${!state.positionConfirmed?'selected':''}>Chọn vị trí xuất phát</option>${nodeOptions.map(id=>`<option value="${id}" ${state.positionConfirmed&&state.position.nodeId===id?'selected':''}>${esc(label(id))}</option>`).join('')}${state.position.kind==='edge'?'<option value="current" selected>Giữ vị trí giữa đoạn đường hiện tại</option>':''}</select></label>
+            <div class="trip-grid"><label class="field-label">Điểm đến<select id="destination" class="trip-select"><option value="water" ${state.destinationId==='water'?'selected':''}>Điểm nước gần nhất</option><option value="d_entrance" ${state.destinationId==='d_entrance'?'selected':''}>Cửa tòa D</option></select></label>
+            <label class="field-label">Thời tiết<select id="weather" class="trip-select">${[['unknown','Chưa rõ'],['rain','Đang mưa'],['dry','Không mưa']].map(([id,text])=>`<option value="${id}" ${state.weatherContext.condition===id?'selected':''}>${text}</option>`).join('')}</select></label></div>
+            <label class="field-label">Chọn đường<select id="preference" class="trip-select">${Object.entries(preferences).map(([id,text])=>`<option value="${id}" ${state.routePreference===id?'selected':''}>${text}</option>`).join('')}</select></label>
+            ${state.destinationId!=='water'?`<label class="checkbox-label"><input type="checkbox" id="via-water" ${state.viaWater?'checked':''}> Ghé lấy nước trước khi đến D</label>`:''}
+            <button class="g-primary-btn" data-action="find">Bắt đầu chỉ đường ↗</button>
+          </div>`}
+          ${state.route?`<p class="route-evidence">${esc(preferences[state.route.preference||state.routePreference])} · ${state.route.waypointIds?.length?'Ghé lấy nước · ':''}Chưa xác minh thực địa.</p>`:''}
+          <p class="weather-source">${{rain:'🌧 Mưa',dry:'☀ Không mưa',unknown:'❓ Chưa rõ'}[state.weatherContext.condition]||'❓ Chưa rõ'} · bạn cung cấp</p>
+          ${state.confirmation?`<div class="confirmation-box"><p>${esc(state.confirmation.message)}</p><div class="g-btn-row">${state.confirmation.type==='report_select'?pointOptions().map(p=>`<button class="g-secondary-btn" data-report-point="${esc(p.id)}">${esc(p.label||label(p.nodeId))}</button>`).join(''):'<button class="g-primary-btn" data-action="confirm-local">Xác nhận</button>'}<button class="g-secondary-btn" data-action="cancel-local">Hủy</button></div></div>`:''}
+          ${state.notice?`<p class="inline-notice" role="status">${esc(state.notice)}</p>`:''}
+        </div>
+        <div class="right-section right-chat" aria-label="Trợ lý Vmap">
+          <div class="section-label"><span class="section-icon">💬</span> Trợ lý Vmap <span class="provider-tag">${state.providerMode==='live'?'AI':state.providerMode==='mock'?'Mô phỏng':'Chưa kết nối'}</span></div>
+          <div class="chat-messages" id="chat-messages">
+            <div class="chat-welcome">
+              <div class="chat-welcome-icon">💧</div>
+              <p>Xin chào! Tôi hỗ trợ tìm nước, chọn đường tránh mưa và hướng dẫn chặng tiếp theo.</p>
+            </div>
+            ${state.chatHistory.map(m=>`<div class="chat-msg ${m.role}"><div class="chat-msg-bubble">${esc(m.text)}</div></div>`).join('')}
+            ${state.busy?'<div class="chat-msg assistant"><div class="chat-msg-bubble typing"><span></span><span></span><span></span></div></div>':''}
+          </div>
+        </div>
+      </div>
+      <div class="chat-bottom-bar">
+        <div class="chat-quick-actions">${state.busy?'':`<button class="sugg-chip" data-action="ask-water">💧 Tìm nước</button><button class="sugg-chip" data-action="ask-next">🧭 Đi đâu tiếp?</button><button class="sugg-chip" data-action="report">⚠ Báo hỏng</button>${chatActions()}`}</div>
+        <form id="ask" class="chat-input-bar"><input id="question" class="chat-input" maxlength="500" placeholder="Nhập yêu cầu…" ${state.busy?'disabled':''}><button class="chat-send-btn" ${state.busy?'disabled':''} aria-label="Gửi">↗</button></form>
+      </div>
+    </aside>
   </main>`;
   const viewport=document.getElementById('viewport');
   if(scroll&&viewport){viewport.scrollLeft=scroll.x;viewport.scrollTop=scroll.y;}
   centerPlayer();
+  const chatEl=document.getElementById('chat-messages');
+  if(chatEl)chatEl.scrollTop=chatEl.scrollHeight;
 }
 function report(pointId){
   stop();state.showAssistant=false;
@@ -282,8 +305,8 @@ app.addEventListener('click',event=>{
   }
   switch(el.dataset.action){
     case 'find':find();return;
-    case 'chat':stop();state.showAssistant=true;break;
-    case 'close-chat':stop();state.showAssistant=false;break;
+    case 'chat':stop();break;
+    case 'close-chat':stop();break;
     case 'ask-next':ask('Giờ đi đâu tiếp?');return;
     case 'ask-water':ask('Tìm nước giúp tôi');return;
     case 'follow':stop();state.floor=coords().floor;state.follow=true;break;
@@ -312,7 +335,7 @@ app.addEventListener('pointerdown',event=>{
 for(const name of ['pointerup','pointercancel','lostpointercapture'])app.addEventListener(name,stop);
 app.addEventListener('pointerleave',event=>{if(event.target.closest?.('[data-motion]'))stop();});
 window.addEventListener('keydown',event=>{
-  if(event.target.matches?.('input,textarea,select,[contenteditable="true"]') || state.showAssistant)return;
+  if(event.target.matches?.('input,textarea,select,[contenteditable="true"]'))return;
   if(event.key==='Escape'){stop();return;}
   if(event.key!=='ArrowUp'&&event.key!=='ArrowDown')return;
   event.preventDefault();

@@ -718,3 +718,467 @@ button:disabled { cursor: not-allowed; opacity: .6; }
     display: none;
   }
 }
+
+/* ===== SPLIT LAYOUT: MAP LEFT + PANEL RIGHT ===== */
+.split-layout {
+  display: flex !important;
+  flex-direction: row;
+  width: 100vw;
+  height: 100vh;
+  height: 100dvh;
+  overflow: hidden;
+}
+
+/* --- LEFT: MAP AREA --- */
+.split-left {
+  flex: 1;
+  position: relative;
+  min-width: 0;
+  height: 100%;
+  overflow: hidden;
+}
+
+.split-left .gmaps-viewport {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: block;
+  overflow: hidden;
+}
+
+.split-left .map-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.split-left .campus-map {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.split-left .map-note {
+  display: none;
+}
+
+.split-left .gmaps-top-overlay {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  right: 14px;
+  z-index: 25;
+  pointer-events: none;
+}
+
+.split-left .gmaps-top-overlay > * {
+  pointer-events: auto;
+}
+
+.split-left .gmaps-fabs {
+  position: absolute;
+  right: 16px;
+  bottom: 24px;
+  top: auto;
+}
+
+/* --- RIGHT: PANEL --- */
+.split-right {
+  width: 390px;
+  min-width: 320px;
+  max-width: 420px;
+  height: 100%;
+  background: #fafbfc;
+  border-left: 1px solid #e4e7eb;
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 0;
+  z-index: 30;
+  box-shadow: -2px 0 12px rgba(60,64,67,0.08);
+}
+
+/* Panel brand header */
+.panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 18px;
+  border-bottom: 1px solid #e4e7eb;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.panel-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 18px;
+  font-weight: 800;
+  color: #1a3a2f;
+  letter-spacing: -0.5px;
+}
+
+.panel-brand-icon {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: #1a3a2f;
+  color: #d4ee8c;
+  display: grid;
+  place-items: center;
+  font-size: 16px;
+}
+
+.panel-dot {
+  color: #8aad55;
+}
+
+.panel-badge {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  color: #6b8a52;
+  background: #edf4e3;
+  padding: 4px 8px;
+  border-radius: 10px;
+}
+
+/* Scrollable content */
+.right-panel-scroll {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+
+/* Sections */
+.right-section {
+  padding: 14px 18px;
+}
+
+.right-controls {
+  border-bottom: 1px solid #e8ebee;
+  background: #fff;
+}
+
+.section-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  color: #6b7280;
+  letter-spacing: 0.3px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.section-icon {
+  font-size: 14px;
+}
+
+.provider-tag {
+  font-size: 9px;
+  font-weight: 600;
+  color: #8b95a5;
+  background: #f0f2f5;
+  padding: 2px 6px;
+  border-radius: 6px;
+  text-transform: none;
+  letter-spacing: 0;
+  margin-left: auto;
+}
+
+.right-section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--g-text);
+  margin: 0 0 10px;
+  line-height: 1.3;
+}
+
+/* Controls form grouping */
+.controls-form {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.controls-form .field-label {
+  margin: 0;
+}
+
+.controls-form .trip-select {
+  margin-top: 5px;
+  font-size: 13px;
+  padding: 8px 10px;
+  min-height: 38px;
+  border-radius: 10px;
+}
+
+.controls-form .g-primary-btn {
+  margin-top: 6px;
+}
+
+/* --- CHAT AREA --- */
+.right-chat {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+  background: #f5f7fa;
+}
+
+.chat-messages {
+  flex: 1;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 8px 4px;
+  min-height: 80px;
+}
+
+/* Welcome card */
+.chat-welcome {
+  text-align: center;
+  padding: 16px 12px;
+  color: #6b7280;
+  font-size: 12px;
+  line-height: 1.6;
+}
+
+.chat-welcome-icon {
+  font-size: 28px;
+  margin-bottom: 8px;
+}
+
+.chat-welcome p {
+  margin: 0;
+}
+
+/* Chat message bubbles */
+.chat-msg {
+  display: flex;
+  padding: 0 2px;
+}
+
+.chat-msg.user {
+  justify-content: flex-end;
+}
+
+.chat-msg.assistant {
+  justify-content: flex-start;
+}
+
+.chat-msg-bubble {
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  font-size: 13px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.chat-msg.user .chat-msg-bubble {
+  background: var(--g-blue);
+  color: #fff;
+  border-bottom-right-radius: 4px;
+}
+
+.chat-msg.assistant .chat-msg-bubble {
+  background: #fff;
+  color: var(--g-text);
+  border: 1px solid #e8ebee;
+  border-bottom-left-radius: 4px;
+}
+
+/* Typing animation (3 dots) */
+.chat-msg-bubble.typing {
+  display: flex;
+  gap: 4px;
+  align-items: center;
+  padding: 12px 18px;
+  min-width: 60px;
+}
+
+.chat-msg-bubble.typing span {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #9ca3af;
+  animation: typing-bounce 1.2s ease-in-out infinite;
+}
+
+.chat-msg-bubble.typing span:nth-child(2) {
+  animation-delay: 0.15s;
+}
+
+.chat-msg-bubble.typing span:nth-child(3) {
+  animation-delay: 0.3s;
+}
+
+@keyframes typing-bounce {
+  0%, 60%, 100% { transform: translateY(0); opacity: 0.4; }
+  30% { transform: translateY(-4px); opacity: 1; }
+}
+
+/* --- STICKY BOTTOM BAR --- */
+.chat-bottom-bar {
+  flex-shrink: 0;
+  border-top: 1px solid #e4e7eb;
+  background: #fff;
+  padding: 10px 14px max(10px, env(safe-area-inset-bottom));
+}
+
+.chat-quick-actions {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 8px;
+}
+
+.chat-quick-actions:empty {
+  display: none;
+}
+
+.chat-quick-actions .sugg-chip {
+  font-size: 11px;
+  padding: 5px 10px;
+  border-radius: 14px;
+  border: 1px solid #e0e3e8;
+  background: #fff;
+  color: var(--g-text);
+  font-weight: 500;
+  white-space: nowrap;
+  transition: background 0.15s, border-color 0.15s;
+}
+
+.chat-quick-actions .sugg-chip:hover:not(:disabled) {
+  background: #f0f4ff;
+  border-color: var(--g-blue);
+  color: var(--g-blue);
+}
+
+.chat-quick-actions .sugg-chip:disabled {
+  opacity: 0.5;
+}
+
+.chat-input-bar {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.chat-input {
+  flex: 1;
+  min-width: 0;
+  height: 42px;
+  border: 1px solid #d5d9e0;
+  border-radius: 21px;
+  padding: 0 16px;
+  font-size: 13px;
+  outline: none;
+  background: #f8f9fb;
+  transition: border-color 0.15s, box-shadow 0.15s, background 0.15s;
+}
+
+.chat-input:focus {
+  border-color: var(--g-blue);
+  box-shadow: 0 0 0 3px rgba(26,115,232,0.12);
+  background: #fff;
+}
+
+.chat-send-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: none;
+  background: var(--g-blue);
+  color: #fff;
+  font-size: 18px;
+  font-weight: 700;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  transition: background 0.15s, transform 0.1s;
+  cursor: pointer;
+}
+
+.chat-send-btn:hover:not(:disabled) {
+  background: var(--g-blue-hover);
+  transform: scale(1.05);
+}
+
+.chat-send-btn:disabled {
+  background: #c8cdd3;
+  cursor: not-allowed;
+}
+
+/* Hide old bottom-sheet and assistant modal in split layout */
+.split-layout .gmaps-bottom-sheet {
+  display: none !important;
+}
+
+.split-layout .assistant-backdrop {
+  display: none !important;
+}
+
+/* --- MOBILE: stack vertically --- */
+@media (max-width: 680px) {
+  .split-layout {
+    flex-direction: column;
+  }
+  .split-left {
+    height: 40dvh;
+    min-height: 180px;
+    flex: none;
+  }
+  .split-right {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    height: auto;
+    flex: 1;
+    border-left: none;
+    border-top: 1px solid #e4e7eb;
+    box-shadow: 0 -2px 10px rgba(60,64,67,0.08);
+  }
+  .panel-header {
+    padding: 8px 14px;
+  }
+  .panel-brand {
+    font-size: 16px;
+  }
+  .right-section {
+    padding: 10px 14px;
+  }
+  .chat-messages {
+    min-height: 60px;
+  }
+  .chat-welcome {
+    padding: 10px 8px;
+  }
+  .chat-bottom-bar {
+    padding: 8px 12px max(8px, env(safe-area-inset-bottom));
+  }
+  .split-left .gmaps-top-overlay {
+    top: 8px;
+    left: 8px;
+    right: 8px;
+  }
+  .split-left .gmaps-fabs {
+    right: 8px;
+    bottom: 10px;
+    gap: 6px;
+  }
+  .split-left .g-fab {
+    width: 36px;
+    height: 36px;
+    font-size: 17px;
+  }
+}

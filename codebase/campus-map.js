@@ -344,7 +344,7 @@
       '</filter>' +
       '</defs>';
 
-    return '<svg class="campus-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1126 906" role="img" aria-label="Bản đồ VinUni và sơ đồ Tòa E" data-floor="' + esc(floor) + '" data-zoom="' + zoom + '">' +
+    return '<svg class="campus-map" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1126 906" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Bản đồ VinUni và sơ đồ Tòa E" data-floor="' + esc(floor) + '" data-zoom="' + zoom + '">' +
       styles + defs +
       '<g transform="translate(' + dx.toFixed(2) + ' ' + dy.toFixed(2) + ') scale(' + zoom.toFixed(2) + ')">' + body + '</g></svg>';
   }
