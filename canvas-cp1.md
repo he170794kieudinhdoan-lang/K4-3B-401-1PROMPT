@@ -2,9 +2,9 @@
 
 **Track:** Track E – Open Lane
 **Đề:** Vmap – AI Assistant giúp học viên AI20k tìm khu vực lấy/refill nước tại VinUni.
-**Nhóm:** Vmap · Lớp 3A · Phòng: **E402**
+**Nhóm:** 1PROMPT · Lớp 3B · Phòng: **E402**
 **Đội trưởng:** **Đoàn Quang Thắng** · MSSV **2A202602395** · GitHub [conanWinner](https://github.com/conanWinner)
-**Repo:** `K4-3A-E402-Vmap` — [đội trưởng tạo và paste link public tại đây trước 19:30]
+**Repo:** [K4-3B-402-1PROMPT](https://github.com/he170794kieudinhdoan-lang/K4-3B-402-1PROMPT)
 
 ---
 
@@ -18,7 +18,23 @@ Khi cần lấy/refill nước tại VinUni, học viên AI20k đôi khi không 
 
 ## 3 · Bằng chứng đầu (1–2 con số + quote)
 
-Nhóm đang khảo sát học viên AI20k qua form/phỏng vấn nhanh và quan sát thực địa các điểm nước tại VinUni để ghi nhận vị trí, tình trạng, cách người học đang tự tìm nước và thời gian họ mất.
+**Nguồn:** Google Form + phỏng vấn nhanh học viên AI20k (17–18/9). Log CSV nguyên văn: [`evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`](evidence/Kh%E1%BA%A3o_s%C3%A1t_tr%E1%BA%A3i_nghi%E1%BB%87m_t%C3%ACm_khu_v%E1%BB%B12026-09-18_06_44_07.csv) — **n = 21** phiếu hợp lệ (đạt chuẩn A ≥ 20).
+
+**Con số chính:**
+- **17/21 (81%)** học viên AI20k từng cần tìm nơi lấy/refill nước nhưng không biết ở đâu.
+- **18/21 (86%)** hiện chỉ biết **0–2 điểm nước** quanh khu vực học thường xuyên.
+- **5/17 (29%) confirmed pain** mất **trên 5 phút** mỗi lần tìm; **14/21 (67%)** muốn thông tin "điểm nước gần nhất".
+
+**Quote nguyên văn từ CSV** (số trong ngoặc = số phiếu ghi đúng cụm này):
+
+- *"Không biết điểm nước nằm ở đâu"* (×10)
+- *"Thiếu / khó thấy biển chỉ dẫn"* (×6)
+- *"Campus rộng, khó định hướng"* (×5)
+- *"Không biết điểm nào gần nhất"* (×4)
+- *"Không biết điểm nước có đang sử dụng được không"* (×2)
+- *"Cần có bản đồ rõ ràng hơn"* — quote mở về mong muốn cải thiện.
+
+Chi tiết bảng phân bố 6 chiều + willing users để trong `spec.md` §1.
 
 ## 4 · Lát cắt MỘT CÂU (1 user · 1 việc · 1 quyết định AI · 1 kết quả)
 
@@ -38,10 +54,10 @@ Dự kiến ≥3 học viên ngoài nhóm sẵn sàng test prototype.
 
 | Thành viên · MSSV | Vai trò | Phần việc cụ thể (giám khảo có thể hỏi bất kỳ ai — vibe-coding rule) |
 |---|---|---|
-| **Đoàn Quang Thắng** · 2A202602395 | Product lead | Canvas/spec, system prompt, output contract |
-| Phạm Minh Hiếu · 2A202602630 | Data & evidence | Mining, khảo sát |
-| Đỗ Việt Hoàng · 2A202602882 | Eval, UI/UX | Golden set, quality bar, eval, UI, 4 đường trải nghiệm, user test |
-| Kiều Đình Đoàn · 2A202602936 | Backend | Gọi model, validator |
+| Phạm Minh Hiếu · 2A202602630 | Product/BA + spec | Canvas, spec §1–§2, câu hỏi khảo sát, chốt lát cắt |
+| Đỗ Việt Hoàng · 2A202602882 | AI/backend | Prompt, chọn điểm từ data đã xác minh, lời gọi AI thật |
+| Kiều Đình Đoàn · 2A202602936 | frontend/prototype | UI luồng tìm nước, mock/prototype bấm được (CP2) |
+| **Đoàn Quang Thắng** · 2A202602395 | test + data + slide/demo + docs + form (Đội trưởng) | Nhật ký evidence, eval, slide/demo, docs, nộp form CP1–CP5 |
 
 ---
 
