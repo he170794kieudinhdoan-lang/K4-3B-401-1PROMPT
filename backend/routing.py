@@ -9,7 +9,7 @@ DATA_PATH = Path(__file__).resolve().parents[1] / 'codebase' / 'campus-data.json
 
 
 def load_data():
-    return json.loads(DATA_PATH.read_text())
+    return json.loads(DATA_PATH.read_text(encoding="utf-8"))
 
 
 def permitted(edge, preference):

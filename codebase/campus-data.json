@@ -268,6 +268,105 @@
       "aliases": [
         "nước quảng trường"
       ]
+    },
+    {
+      "id": "north_gate",
+      "x": 500,
+      "y": 120,
+      "floor": "campus",
+      "label": "Cổng phía Bắc",
+      "aliases": [
+        "Cổng phía Bắc"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "west_park",
+      "x": 180,
+      "y": 300,
+      "floor": "campus",
+      "label": "Công viên phía Tây",
+      "aliases": [
+        "Công viên phía Tây"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "campus_core",
+      "x": 430,
+      "y": 350,
+      "floor": "campus",
+      "label": "Ngã tư khuôn viên",
+      "aliases": [
+        "Ngã tư khuôn viên"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "east_plaza",
+      "x": 950,
+      "y": 380,
+      "floor": "campus",
+      "label": "Quảng trường phía Đông",
+      "aliases": [
+        "Quảng trường phía Đông"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "lakeside",
+      "x": 500,
+      "y": 790,
+      "floor": "campus",
+      "label": "Bờ hồ phía Tây",
+      "aliases": [
+        "Bờ hồ phía Tây"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "water_north",
+      "x": 560,
+      "y": 160,
+      "floor": "campus",
+      "label": "Máy nước Cổng Bắc",
+      "buildingId": null,
+      "aliases": [
+        "nước cổng bắc"
+      ]
+    },
+    {
+      "id": "water_core",
+      "x": 470,
+      "y": 370,
+      "floor": "campus",
+      "label": "Máy nước Ngã tư khuôn viên",
+      "buildingId": null,
+      "aliases": [
+        "nước ngã tư"
+      ]
+    },
+    {
+      "id": "water_east",
+      "x": 905,
+      "y": 420,
+      "floor": "campus",
+      "label": "Máy nước Quảng trường Đông",
+      "buildingId": null,
+      "aliases": [
+        "nước quảng trường đông"
+      ]
+    },
+    {
+      "id": "water_lake",
+      "x": 520,
+      "y": 760,
+      "floor": "campus",
+      "label": "Máy nước Bờ hồ",
+      "buildingId": null,
+      "aliases": [
+        "nước bờ hồ"
+      ]
     }
   ],
   "edges": [
