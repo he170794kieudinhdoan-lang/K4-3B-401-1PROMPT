@@ -498,10 +498,18 @@ def response_node(state):
     r['trace']=state.get('trace',[])
     r['elapsedMs']=round((time.monotonic()-state['started'])*1000)
     req=state['request']
-    print(json.dumps({'requestId':req['requestId'],'message':req['message'],'status':r['status'],
-                      'route':(r.get('route') or {}).get('destinationId') if isinstance(r.get('route'),dict) else r.get('route'),
-                      'trace':[t['tool'] for t in r.get('trace',[])],'elapsedMs':r['elapsedMs'],
-                      'error':r.get('error'),'response':r['message']}, ensure_ascii=False), flush=True)
+    try:
+        line=json.dumps({'requestId':req['requestId'],'message':req['message'],'status':r['status'],
+                         'route':(r.get('route') or {}).get('destinationId') if isinstance(r.get('route'),dict) else r.get('route'),
+                         'trace':[t['tool'] for t in r.get('trace',[])],'elapsedMs':r['elapsedMs'],
+                         'error':r.get('error'),'response':r['message']}, ensure_ascii=False)
+        if hasattr(sys.stdout,'buffer'):
+            sys.stdout.buffer.write((line+'\n').encode('utf-8')); sys.stdout.buffer.flush()
+        else:
+            print(line, flush=True)
+    except Exception:
+        print(json.dumps({'requestId':req['requestId'],'message':req['message'],'status':r['status'],
+                          'error':r.get('error')}, ensure_ascii=True), flush=True)
     return {'response':r}
 
 
