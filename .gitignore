@@ -184,3 +184,9 @@ fabric.properties
 # idea folder, uncomment if you don't need it
 .idea
 AGENTS.md
+
+# Local Vercel project metadata
+.vercel/
+
+# docs
+docs/

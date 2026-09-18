@@ -1,5 +1,7 @@
 # Vmap — demo tương tác
 
+> Tài liệu dưới đây mô tả phiên bản CP2 trước. `demo.html` hiện mở bản đồ campus và trong nhà mới; xem [CAMPUS-DEMO.md](CAMPUS-DEMO.md) để chạy và kiểm tra luồng hiện tại.
+
 Mở `demo.html` trực tiếp bằng trình duyệt. `index.html` tự chuyển sang bản mới; giao diện cũ vẫn được giữ trong file đó.
 
 Không cần cài thư viện, API key hay backend. Font Google là tài nguyên tùy chọn; khi mất mạng dùng font hệ thống. Bản đồ SVG, hình minh họa và logic nằm trong repo.

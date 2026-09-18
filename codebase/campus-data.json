@@ -1,0 +1,1062 @@
+{
+  "dataVersion": "campus-demo-v2",
+  "provenance": "simulated",
+  "description": "Sơ đồ và trạng thái mẫu, chưa xác minh thực địa. Chi phí là đơn vị hình học mô phỏng, không phải mét.",
+  "nodes": [
+    {
+      "id": "west_gate",
+      "x": 94,
+      "y": 500,
+      "floor": "campus",
+      "label": "Cổng phía Tây",
+      "aliases": [
+        "Cổng phía Tây"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "south_gate",
+      "x": 220,
+      "y": 780,
+      "floor": "campus",
+      "label": "Cổng phía Nam",
+      "aliases": [
+        "Cổng phía Nam"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "d_walk",
+      "x": 238,
+      "y": 492,
+      "floor": "campus",
+      "label": "Lối đi D Building",
+      "aliases": [
+        "Lối đi D Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "c_walk",
+      "x": 323,
+      "y": 479,
+      "floor": "campus",
+      "label": "Lối đi C Building",
+      "aliases": [
+        "Lối đi C Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "a_walk",
+      "x": 430,
+      "y": 464,
+      "floor": "campus",
+      "label": "Lối đi A Building",
+      "aliases": [
+        "Lối đi A Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "i_walk",
+      "x": 355,
+      "y": 530,
+      "floor": "campus",
+      "label": "Lối đi I Building",
+      "aliases": [
+        "Lối đi I Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "h_walk",
+      "x": 335,
+      "y": 370,
+      "floor": "campus",
+      "label": "Lối vào H Building",
+      "aliases": [
+        "Lối vào H Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "g_walk",
+      "x": 575,
+      "y": 445,
+      "floor": "campus",
+      "label": "Lối vào G Building",
+      "aliases": [
+        "Lối vào G Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "e_entrance",
+      "x": 470,
+      "y": 566,
+      "floor": "campus",
+      "label": "Cửa vào E Building",
+      "aliases": [
+        "Cửa vào E Building"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "f_walk",
+      "x": 486,
+      "y": 665,
+      "floor": "campus",
+      "label": "Lối vào F Building",
+      "aliases": [
+        "Lối vào F Building"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "square",
+      "x": 320,
+      "y": 610,
+      "floor": "campus",
+      "label": "Central Square",
+      "aliases": [
+        "Central Square"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "plaza_east",
+      "x": 590,
+      "y": 520,
+      "floor": "campus",
+      "label": "Lối đi phía Đông",
+      "aliases": [
+        "Lối đi phía Đông"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "stadium_walk",
+      "x": 616,
+      "y": 356,
+      "floor": "campus",
+      "label": "VinUni Stadium",
+      "aliases": [
+        "VinUni Stadium"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "sports_walk",
+      "x": 790,
+      "y": 430,
+      "floor": "campus",
+      "label": "Indoor Sports Complex",
+      "aliases": [
+        "Indoor Sports Complex"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "dorm_walk",
+      "x": 940,
+      "y": 560,
+      "floor": "campus",
+      "label": "VinUni Dormitory",
+      "aliases": [
+        "VinUni Dormitory"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "lake_walk",
+      "x": 580,
+      "y": 735,
+      "floor": "campus",
+      "label": "VinUni Lake",
+      "aliases": [
+        "VinUni Lake"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "e_lobby_1",
+      "x": 318,
+      "y": 430,
+      "floor": "1",
+      "label": "Sảnh E · Tầng 1",
+      "aliases": [
+        "Sảnh E · Tầng 1"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "e_stairs_1",
+      "x": 600,
+      "y": 430,
+      "floor": "1",
+      "label": "Cầu thang E · Tầng 1",
+      "aliases": [
+        "Cầu thang E · Tầng 1"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "e_stairs_2",
+      "x": 600,
+      "y": 430,
+      "floor": "2",
+      "label": "Cầu thang E · Tầng 2",
+      "aliases": [
+        "Cầu thang E · Tầng 2"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "e_hall_2",
+      "x": 720,
+      "y": 430,
+      "floor": "2",
+      "label": "Hành lang E · Tầng 2",
+      "aliases": [
+        "Hành lang E · Tầng 2"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "water",
+      "x": 835,
+      "y": 430,
+      "floor": "2",
+      "label": "Máy nước E · Tầng 2",
+      "aliases": [
+        "Máy nước E · Tầng 2"
+      ],
+      "buildingId": "E"
+    },
+    {
+      "id": "d_entrance",
+      "x": 240,
+      "y": 478,
+      "floor": "campus",
+      "label": "Cửa tòa D",
+      "buildingId": "D",
+      "aliases": [
+        "tòa D",
+        "D Building",
+        "D"
+      ]
+    },
+    {
+      "id": "water_d",
+      "x": 280,
+      "y": 492,
+      "floor": "campus",
+      "label": "Điểm nước gần D · mẫu",
+      "buildingId": "D",
+      "aliases": [
+        "nước D"
+      ]
+    },
+    {
+      "id": "water_square",
+      "x": 360,
+      "y": 610,
+      "floor": "campus",
+      "label": "Điểm nước quảng trường · mẫu",
+      "buildingId": null,
+      "aliases": [
+        "nước quảng trường"
+      ]
+    }
+  ],
+  "edges": [
+    {
+      "id": "west_gate__d_walk",
+      "from": "west_gate",
+      "to": "d_walk",
+      "geometry": [
+        [
+          94,
+          500
+        ],
+        [
+          238,
+          492
+        ]
+      ],
+      "cost": 144.22205101855957,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "d_walk__c_walk",
+      "from": "d_walk",
+      "to": "c_walk",
+      "geometry": [
+        [
+          238,
+          492
+        ],
+        [
+          323,
+          479
+        ]
+      ],
+      "cost": 85.98837130682264,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "c_walk__a_walk",
+      "from": "c_walk",
+      "to": "a_walk",
+      "geometry": [
+        [
+          323,
+          479
+        ],
+        [
+          430,
+          464
+        ]
+      ],
+      "cost": 108.04628637764463,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "a_walk__i_walk",
+      "from": "a_walk",
+      "to": "i_walk",
+      "geometry": [
+        [
+          430,
+          464
+        ],
+        [
+          425,
+          530
+        ],
+        [
+          355,
+          530
+        ]
+      ],
+      "cost": 136.18912297349164,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "i_walk__e_entrance",
+      "from": "i_walk",
+      "to": "e_entrance",
+      "geometry": [
+        [
+          355,
+          530
+        ],
+        [
+          470,
+          566
+        ]
+      ],
+      "cost": 120.50311199301036,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_entrance__f_walk",
+      "from": "e_entrance",
+      "to": "f_walk",
+      "geometry": [
+        [
+          470,
+          566
+        ],
+        [
+          430,
+          566
+        ],
+        [
+          430,
+          665
+        ],
+        [
+          486,
+          665
+        ]
+      ],
+      "cost": 195,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "f_walk__south_gate",
+      "from": "f_walk",
+      "to": "south_gate",
+      "geometry": [
+        [
+          486,
+          665
+        ],
+        [
+          220,
+          780
+        ]
+      ],
+      "cost": 289.79475495598604,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "square__south_gate",
+      "from": "square",
+      "to": "south_gate",
+      "geometry": [
+        [
+          320,
+          610
+        ],
+        [
+          220,
+          780
+        ]
+      ],
+      "cost": 197.2308292331602,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "square__c_walk",
+      "from": "square",
+      "to": "c_walk",
+      "geometry": [
+        [
+          320,
+          610
+        ],
+        [
+          323,
+          479
+        ]
+      ],
+      "cost": 131.03434664239754,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "square__a_walk",
+      "from": "square",
+      "to": "a_walk",
+      "geometry": [
+        [
+          320,
+          610
+        ],
+        [
+          355,
+          530
+        ],
+        [
+          425,
+          530
+        ],
+        [
+          430,
+          464
+        ]
+      ],
+      "cost": 223.51036895635656,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "square__f_walk",
+      "from": "square",
+      "to": "f_walk",
+      "geometry": [
+        [
+          320,
+          610
+        ],
+        [
+          486,
+          665
+        ]
+      ],
+      "cost": 174.87424052730006,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "a_walk__g_walk",
+      "from": "a_walk",
+      "to": "g_walk",
+      "geometry": [
+        [
+          430,
+          464
+        ],
+        [
+          575,
+          445
+        ]
+      ],
+      "cost": 146.23952953972463,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "g_walk__h_walk",
+      "from": "g_walk",
+      "to": "h_walk",
+      "geometry": [
+        [
+          575,
+          445
+        ],
+        [
+          575,
+          365
+        ],
+        [
+          335,
+          365
+        ],
+        [
+          335,
+          370
+        ]
+      ],
+      "cost": 325,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "h_walk__stadium_walk",
+      "from": "h_walk",
+      "to": "stadium_walk",
+      "geometry": [
+        [
+          335,
+          370
+        ],
+        [
+          335,
+          360
+        ],
+        [
+          616,
+          360
+        ],
+        [
+          616,
+          356
+        ]
+      ],
+      "cost": 295,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "stadium_walk__sports_walk",
+      "from": "stadium_walk",
+      "to": "sports_walk",
+      "geometry": [
+        [
+          616,
+          356
+        ],
+        [
+          790,
+          430
+        ]
+      ],
+      "cost": 189.08199279677586,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "sports_walk__dorm_walk",
+      "from": "sports_walk",
+      "to": "dorm_walk",
+      "geometry": [
+        [
+          790,
+          430
+        ],
+        [
+          940,
+          560
+        ]
+      ],
+      "cost": 198.49433241279206,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "dorm_walk__plaza_east",
+      "from": "dorm_walk",
+      "to": "plaza_east",
+      "geometry": [
+        [
+          940,
+          560
+        ],
+        [
+          590,
+          520
+        ]
+      ],
+      "cost": 352.2782990761707,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "plaza_east__lake_walk",
+      "from": "plaza_east",
+      "to": "lake_walk",
+      "geometry": [
+        [
+          590,
+          520
+        ],
+        [
+          580,
+          735
+        ]
+      ],
+      "cost": 215.23243250030887,
+      "environment": "unknown",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "lake_walk__south_gate",
+      "from": "lake_walk",
+      "to": "south_gate",
+      "geometry": [
+        [
+          580,
+          735
+        ],
+        [
+          220,
+          780
+        ]
+      ],
+      "cost": 362.8015986734347,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_entrance__plaza_east",
+      "from": "e_entrance",
+      "to": "plaza_east",
+      "geometry": [
+        [
+          470,
+          566
+        ],
+        [
+          590,
+          520
+        ]
+      ],
+      "cost": 128.51459061133875,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_entrance__e_lobby_1",
+      "from": "e_entrance",
+      "to": "e_lobby_1",
+      "geometry": [
+        [
+          470,
+          566
+        ],
+        [
+          318,
+          430
+        ]
+      ],
+      "cost": 30,
+      "environment": "indoor",
+      "transition": "door",
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_lobby_1__e_stairs_1",
+      "from": "e_lobby_1",
+      "to": "e_stairs_1",
+      "geometry": [
+        [
+          318,
+          430
+        ],
+        [
+          600,
+          430
+        ]
+      ],
+      "cost": 282,
+      "environment": "indoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_stairs_1__e_stairs_2",
+      "from": "e_stairs_1",
+      "to": "e_stairs_2",
+      "geometry": [
+        [
+          600,
+          430
+        ],
+        [
+          600,
+          430
+        ]
+      ],
+      "cost": 30,
+      "environment": "indoor",
+      "transition": "stairs",
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_stairs_2__e_hall_2",
+      "from": "e_stairs_2",
+      "to": "e_hall_2",
+      "geometry": [
+        [
+          600,
+          430
+        ],
+        [
+          720,
+          430
+        ]
+      ],
+      "cost": 120,
+      "environment": "indoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "e_hall_2__water",
+      "from": "e_hall_2",
+      "to": "water",
+      "geometry": [
+        [
+          720,
+          430
+        ],
+        [
+          835,
+          430
+        ]
+      ],
+      "cost": 115,
+      "environment": "indoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "d_walk__d_entrance",
+      "from": "d_walk",
+      "to": "d_entrance",
+      "geometry": [
+        [
+          238,
+          492
+        ],
+        [
+          240,
+          478
+        ]
+      ],
+      "cost": 14.142135623730951,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "d_walk__water_d",
+      "from": "d_walk",
+      "to": "water_d",
+      "geometry": [
+        [
+          238,
+          492
+        ],
+        [
+          280,
+          492
+        ]
+      ],
+      "cost": 42,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "square__water_square",
+      "from": "square",
+      "to": "water_square",
+      "geometry": [
+        [
+          320,
+          610
+        ],
+        [
+          360,
+          610
+        ]
+      ],
+      "cost": 40,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "west_gate__square",
+      "from": "west_gate",
+      "to": "square",
+      "geometry": [
+        [
+          94,
+          500
+        ],
+        [
+          320,
+          610
+        ]
+      ],
+      "cost": 251.34836382996411,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    }
+  ],
+  "waterPoints": [
+    {
+      "id": "water",
+      "nodeId": "water",
+      "label": "Máy nước E · Tầng 2",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_d",
+      "nodeId": "water_d",
+      "label": "Điểm nước gần D · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_square",
+      "nodeId": "water_square",
+      "label": "Điểm nước quảng trường · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    }
+  ],
+  "buildings": [
+    {
+      "id": "D",
+      "label": "Tòa D",
+      "aliases": [
+        "D",
+        "tòa D",
+        "D Building"
+      ],
+      "entranceNodeIds": [
+        "d_entrance"
+      ]
+    },
+    {
+      "id": "E",
+      "label": "Tòa E",
+      "aliases": [
+        "E",
+        "tòa E",
+        "E Building"
+      ],
+      "entranceNodeIds": [
+        "e_entrance"
+      ]
+    }
+  ]
+}

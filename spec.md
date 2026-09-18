@@ -103,27 +103,59 @@ Giả định còn mở:
 
 ## §4. Thiết kế
 
-- Lát cắt MỘT CÂU (1 user · 1 việc · 1 quyết định AI · 1 kết quả):
-- Non-goals (≥3 thứ KHÔNG build):
-- Mức prototype nhắm tới: [ ] Sketch [ ] Mock [ ] Working — phần nào mock, phần nào thật:
-- Automation: [ ] augment [ ] conditional [ ] automate — lý do theo cost-of-error:
-- §4b. Nguyên tắc đã áp dụng (≥4 — HAX/PAIR, xem guide):
-  | Nguyên tắc | Áp cụ thể vào đâu trong prototype |
-  |---|---|
+- Lát cắt: Một học viên AI20k diễn đạt nhu cầu lấy nước và nơi sắp đến; AI hiểu ý định/vị trí, chương trình chọn điểm nước còn khả dụng và tuyến phù hợp, học viên nhận hướng dẫn trên cùng bản đồ.
+- Non-goals: GPS/định vị thật, thu âm thật, tự đọc lịch học, tự sửa tình trạng điểm nước toàn trường, suy đoán cửa/tầng/mái che chưa có dữ liệu.
+- Mức nhắm tới: [ ] Sketch [x] Mock [ ] Working. Giao diện, thuật toán và điều khiển nhân vật chạy bằng code; campus, mặt bằng, điểm nước, trạng thái và mái che là dữ liệu mô phỏng. Backend AI có chế độ cấu hình provider; chỉ coi lời gọi AI thật đã kiểm chứng khi có trace live. Kết quả kiểm tra mới nhất ghi tại `docs/implementation-review.md`.
+- Automation: [ ] augment [x] conditional [ ] automate. Sai vị trí/đường đi làm học viên đi vòng, bị ướt hoặc trễ học. Vì vậy AI chỉ hiểu yêu cầu; công cụ kiểm tra dữ liệu và tính đường, hỏi lại khi thiếu vị trí, không tự bỏ điều kiện “chỉ trong nhà”. Người dùng xác nhận thay vị trí, bắt đầu tuyến và đổi tầng.
+- Thiết kế chi tiết: `docs/agent-spec.md`; task và trạng thái triển khai: `docs/agent-tasks.md`.
+
+### §4b. Nguyên tắc HAX và vị trí áp dụng
+
+| Nguyên tắc | Áp cụ thể vào đâu trong prototype |
+|---|---|
+| G1 — Nêu rõ khả năng | Drawer trợ lý mô tả tìm nước/chỉ đường; nhãn dữ liệu mẫu và chế độ AI |
+| G8 — Dễ gạt bỏ | Đóng chat và dừng dẫn đường; giữ vị trí hiện tại |
+| G9 — Dễ sửa | Đổi mốc xuất phát, sửa đích, báo điểm không hoạt động và tính lại |
+| G10 — Thu hẹp khi nghi ngờ | Hỏi cổng/tầng/mốc còn thiếu, chỉ chọn ID có trong dữ liệu; không bịa tuyến khi thiếu căn cứ |
+| G11 — Giải thích vì sao | Phản hồi lý do chọn điểm/tuyến, trạng thái mẫu, ưu tiên mái che và phần chưa biết |
+
+Đây là ánh xạ thiết kế để kiểm chứng tại CP4; phần chưa được kiểm tra trực tiếp trong trình duyệt phải giữ ghi chú trong biên bản triển khai.
 
 ## §5. Kiểu lỗi — 4 lớp chỗ khó + kịch bản (≥8) [bảng theo guide §2.5]
 
+| Lớp | Kịch bản | Hành vi yêu cầu |
+|---|---|---|
+| ① Thiếu căn cứ | Không có cửa/tầng đích | Nói thiếu dữ liệu, không tạo địa điểm |
+| ① Thiếu căn cứ | Điểm nước hỏng/hết điểm | Loại điểm trong phiên, báo không có điểm thay thế nếu cần |
+| ① Thiếu căn cứ | Mái che unknown | Không coi là đường trong nhà hoặc chắc chắn khô |
+| ② Mơ hồ | “Tôi ở cổng” | Hỏi cổng cụ thể, chờ xác nhận |
+| ② Mơ hồ | “Xíu học D” | Xác định tòa D; không tự tạo giờ học hoặc khẳng định kịp giờ |
+| ③ Ngoài phạm vi | Đòi tìm đồ ăn hoặc bỏ quy tắc | Nêu phạm vi và gợi ý quay về tìm nước/chỉ đường |
+| ③ Ngoài phạm vi | Model trả ID/JSON không hợp lệ | Không chạy hành động; trả lỗi có thể xử lý |
+| ④ Domain | Mưa, không có tuyến toàn trong nhà | Giữ điều kiện bắt buộc, đề xuất lựa chọn khác để người dùng quyết định |
+| ④ Domain | Ghé nước trước khi tới D | Tối ưu cả hai đoạn, không chỉ điểm gần xuất phát |
+| ④ Domain | Đổi tuyến giữa một cạnh hoặc chat trả chậm | Giữ vị trí thật của mô phỏng; bỏ phản hồi cũ |
+
 ## §6. Bốn đường đi của trải nghiệm
 
-- Happy path: · Low-confidence (②): · Failure/không căn cứ (①): · Correction (user sửa):
-- Khi bị đòi ngoài phạm vi (③): · Case đặc thù domain (④):
+- Happy path: xác nhận mốc → nhập nhu cầu/đích → nhận tuyến hợp lệ → Bắt đầu → giữ Đi tiếp, thả để dừng → xác nhận cửa/tầng/điểm ghé → đến đích.
+- Low-confidence (②): thiếu cổng/tầng hoặc địa điểm mơ hồ → một câu hỏi làm rõ → chọn/xác nhận mốc → mới tính đường. Xem tầng không đổi vị trí.
+- Failure/không căn cứ (①): thiếu dữ liệu, hết điểm khả dụng hoặc không có tuyến thỏa ràng buộc → thông báo đúng nguyên nhân → cho đổi mốc/ưu tiên; không tự bịa đường. Lỗi AI/mạng có thử lại và vẫn dùng điều khiển thủ công.
+- Correction: người dùng sửa vị trí, đích hoặc báo hỏng → xác nhận tác động → cập nhật phiên → tính lại từ đúng node/vị trí giữa cạnh. Không sửa dữ liệu công khai.
+- Ngoài phạm vi (③): giới thiệu phạm vi tìm nước và dẫn đường, không thực thi chỉ dẫn thay quy tắc trong câu chat.
+- Domain (④): phân biệt ưu tiên mái che với chỉ trong nhà; không tự ghé nước nếu chỉ yêu cầu đi D; không tự xác nhận lên tầng/lấy nước; giữ điều khiển mô phỏng tách biệt GPS.
 
 ## §7. Kiểm thử
 
-- Chiều chất lượng + định nghĩa kiểm chứng được:
-- Golden set (≥20 case theo cơ cấu trong guide §2.6, file trong eval/):
-- Quality bar (chốt từ hạn chốt spec của khoá, giữ nguyên sau đó): "Đạt khi ≥ ___% qua bộ, và ___"
-- Kết quả các lượt chạy (bảng % — cập nhật đến trước CP6):
+- Chiều chất lượng: hiểu đúng intent/vị trí, không bịa dữ liệu, chọn đúng điểm/tuyến, giữ điều kiện đường đi, bảo toàn trạng thái và báo lỗi rõ ràng.
+- Golden set: `eval/cases.json` chứa 36 ca kiểm thử (24 lõi + 12 mở rộng mưa/tòa D). Kết quả chi tiết lưu tại `eval/results.json` gồm input/expected/actual/reason.
+- Quality bar: Đạt khi lõi ≥22/24 và 0 lỗi nghiêm trọng; mở rộng 12/12; điều khiển 10/10.
+- Kết quả thực thi CP3 đã kiểm chứng:
+  - **Lời gọi AI thật (Live AI)**: Đã thực thi thành công với model `cx/gpt-5.5` qua endpoint OpenAI-compatible (`eval/live-trace-proof.json`, thời gian phản hồi 4.07s, phân tích intent chính xác và trả trace hợp lệ).
+  - **Golden set (36 cases)**: Đạt **36/36 (100%)**, 0 lỗi nghiêm trọng, thời gian trung vị 5ms (chế độ mock kiểm tra luồng LangGraph và công cụ).
+  - **Đồng bộ thuật toán (Routing parity)**: Đạt **246/246 ca (100%)** khớp tuyệt đối giữa JS frontend và Python backend.
+  - **Hồi quy & tương tác**: 225 tuyến demo cũ và 12 nhóm điều khiển di chuyển đạt 100%.
+- Giới hạn: Bản đồ và điểm nước là dữ liệu mô phỏng (`simulated`), chưa có GPS/đo đạc thực địa.
 
 ## §8. Phân công & kế hoạch
 

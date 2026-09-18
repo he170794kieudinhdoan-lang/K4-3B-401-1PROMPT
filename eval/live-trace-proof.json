@@ -1,0 +1,260 @@
+{
+  "checkpoint": "CP3",
+  "model": "cx/gpt-5.5",
+  "providerMode": "live",
+  "timestamp": "2026-09-18 14:50:53",
+  "latencySeconds": 4.07,
+  "request": {
+    "requestId": "cp3-live-proof-01",
+    "message": "Tôi khát, tìm chỗ lấy nước giúp tôi",
+    "contextVersion": 1,
+    "context": {
+      "position": {
+        "kind": "node",
+        "nodeId": "west_gate"
+      },
+      "positionConfirmed": true,
+      "excludedPointIds": []
+    }
+  },
+  "response": {
+    "requestId": "cp3-live-proof-01",
+    "contextVersion": 1,
+    "positionRevision": 0,
+    "status": "ok",
+    "message": "Tuyến mô phỏng tới Điểm nước gần D · mẫu. Dữ liệu mẫu; chưa thể ước lượng thời gian thực. Tuyến còn đoạn ngoài trời hoặc chưa rõ mái che.",
+    "actions": [
+      {
+        "type": "start_route",
+        "route": {
+          "nodeIds": [
+            "west_gate",
+            "d_walk",
+            "water_d"
+          ],
+          "segments": [
+            {
+              "edgeId": "west_gate__d_walk",
+              "from": "west_gate",
+              "to": "d_walk",
+              "fromOffset": 0.0,
+              "toOffset": 1.0,
+              "cost": 144.22205101855957,
+              "environment": "exposed",
+              "transition": null
+            },
+            {
+              "edgeId": "d_walk__water_d",
+              "from": "d_walk",
+              "to": "water_d",
+              "fromOffset": 0.0,
+              "toOffset": 1.0,
+              "cost": 42.0,
+              "environment": "covered_outdoor",
+              "transition": null
+            }
+          ],
+          "totalCost": 186.222,
+          "id": "route-fa0e584e1c81",
+          "origin": {
+            "kind": "node",
+            "nodeId": "west_gate"
+          },
+          "originId": "west_gate",
+          "destinationId": "water_d",
+          "destinationPointId": "water_d",
+          "waypointIds": [],
+          "costUnit": "simulation_units",
+          "dataVersion": "campus-demo-v2",
+          "preferenceApplied": "shortest",
+          "exposureSummary": {
+            "indoor": 0,
+            "covered_outdoor": 42.0,
+            "exposed": 144.22205101855957,
+            "unknown": 0
+          },
+          "arrivalFeasibility": "unknown",
+          "routeId": "route-fa0e584e1c81",
+          "cost": 186.222,
+          "waterPointId": "water_d",
+          "provenance": "simulated",
+          "distanceMeters": null,
+          "durationSeconds": null
+        }
+      }
+    ],
+    "route": {
+      "nodeIds": [
+        "west_gate",
+        "d_walk",
+        "water_d"
+      ],
+      "segments": [
+        {
+          "edgeId": "west_gate__d_walk",
+          "from": "west_gate",
+          "to": "d_walk",
+          "fromOffset": 0.0,
+          "toOffset": 1.0,
+          "cost": 144.22205101855957,
+          "environment": "exposed",
+          "transition": null
+        },
+        {
+          "edgeId": "d_walk__water_d",
+          "from": "d_walk",
+          "to": "water_d",
+          "fromOffset": 0.0,
+          "toOffset": 1.0,
+          "cost": 42.0,
+          "environment": "covered_outdoor",
+          "transition": null
+        }
+      ],
+      "totalCost": 186.222,
+      "id": "route-fa0e584e1c81",
+      "origin": {
+        "kind": "node",
+        "nodeId": "west_gate"
+      },
+      "originId": "west_gate",
+      "destinationId": "water_d",
+      "destinationPointId": "water_d",
+      "waypointIds": [],
+      "costUnit": "simulation_units",
+      "dataVersion": "campus-demo-v2",
+      "preferenceApplied": "shortest",
+      "exposureSummary": {
+        "indoor": 0,
+        "covered_outdoor": 42.0,
+        "exposed": 144.22205101855957,
+        "unknown": 0
+      },
+      "arrivalFeasibility": "unknown",
+      "routeId": "route-fa0e584e1c81",
+      "cost": 186.222,
+      "waterPointId": "water_d",
+      "provenance": "simulated",
+      "distanceMeters": null,
+      "durationSeconds": null
+    },
+    "evidence": [
+      {
+        "id": "campus-demo-v2",
+        "provenance": "simulated",
+        "source": "campus-data.json",
+        "verifiedAt": null
+      }
+    ],
+    "traceId": "66c9b72830fe4b2f9bcfec937cdc4ccf",
+    "error": null,
+    "contextPatch": {
+      "destinationId": "water",
+      "viaWater": false,
+      "routePreference": "shortest",
+      "weatherContext": {
+        "condition": "unknown",
+        "sourceType": "simulated",
+        "source": "Chưa có dữ liệu thời tiết"
+      }
+    },
+    "providerMode": "live",
+    "weatherContext": {
+      "condition": "unknown",
+      "sourceType": "simulated",
+      "source": "Chưa có dữ liệu thời tiết"
+    },
+    "arrivalFeasibility": "unknown",
+    "trace": [
+      {
+        "tool": "parse_intent",
+        "arguments": {},
+        "result": {
+          "intent": "find_water",
+          "providerMode": "live"
+        }
+      },
+      {
+        "tool": "get_weather_context",
+        "arguments": {},
+        "result": {
+          "condition": "unknown",
+          "sourceType": "simulated",
+          "source": "Chưa có dữ liệu thời tiết"
+        }
+      },
+      {
+        "tool": "find_nearest_water",
+        "arguments": {
+          "position": {
+            "kind": "node",
+            "nodeId": "west_gate"
+          },
+          "destinationId": null,
+          "viaWater": false,
+          "preference": "shortest",
+          "excludedPointIds": []
+        },
+        "result": {
+          "status": "ok",
+          "route": {
+            "nodeIds": [
+              "west_gate",
+              "d_walk",
+              "water_d"
+            ],
+            "segments": [
+              {
+                "edgeId": "west_gate__d_walk",
+                "from": "west_gate",
+                "to": "d_walk",
+                "fromOffset": 0.0,
+                "toOffset": 1.0,
+                "cost": 144.22205101855957,
+                "environment": "exposed",
+                "transition": null
+              },
+              {
+                "edgeId": "d_walk__water_d",
+                "from": "d_walk",
+                "to": "water_d",
+                "fromOffset": 0.0,
+                "toOffset": 1.0,
+                "cost": 42.0,
+                "environment": "covered_outdoor",
+                "transition": null
+              }
+            ],
+            "totalCost": 186.222,
+            "id": "route-fa0e584e1c81",
+            "origin": {
+              "kind": "node",
+              "nodeId": "west_gate"
+            },
+            "originId": "west_gate",
+            "destinationId": "water_d",
+            "destinationPointId": "water_d",
+            "waypointIds": [],
+            "costUnit": "simulation_units",
+            "dataVersion": "campus-demo-v2",
+            "preferenceApplied": "shortest",
+            "exposureSummary": {
+              "indoor": 0,
+              "covered_outdoor": 42.0,
+              "exposed": 144.22205101855957,
+              "unknown": 0
+            },
+            "arrivalFeasibility": "unknown",
+            "routeId": "route-fa0e584e1c81",
+            "cost": 186.222,
+            "waterPointId": "water_d",
+            "provenance": "simulated",
+            "distanceMeters": null,
+            "durationSeconds": null
+          }
+        }
+      }
+    ],
+    "elapsedMs": 4071
+  }
+}
