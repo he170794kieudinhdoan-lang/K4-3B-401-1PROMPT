@@ -2,9 +2,9 @@
 
 **Track:** Track E – Open Lane
 **Đề:** Vmap – AI Assistant giúp học viên AI20k tìm khu vực lấy/refill nước tại VinUni.
-**Nhóm:** Vmap · Lớp 3A · Phòng: **E402**
+**Nhóm:** 1PROMPT · Lớp 3B · Phòng: **E402**
 **Đội trưởng:** **Đoàn Quang Thắng** · MSSV **2A202602395** · GitHub [conanWinner](https://github.com/conanWinner)
-**Repo:** `K4-3A-E402-Vmap` — [đội trưởng tạo và paste link public tại đây trước 19:30]
+**Repo:** [K4-3B-402-1PROMPT](https://github.com/he170794kieudinhdoan-lang/K4-3B-402-1PROMPT)
 
 ---
 
@@ -54,10 +54,10 @@ Dự kiến ≥3 học viên ngoài nhóm sẵn sàng test prototype.
 
 | Thành viên · MSSV | Vai trò | Phần việc cụ thể (giám khảo có thể hỏi bất kỳ ai — vibe-coding rule) |
 |---|---|---|
-| **Đoàn Quang Thắng** · 2A202602395 | Product lead | Canvas/spec, system prompt, output contract |
-| Phạm Minh Hiếu · 2A202602630 | Data & evidence | Mining, khảo sát |
-| Đỗ Việt Hoàng · 2A202602882 | Eval, UI/UX | Golden set, quality bar, eval, UI, 4 đường trải nghiệm, user test |
-| Kiều Đình Đoàn · 2A202602936 | Backend | Gọi model, validator |
+| Phạm Minh Hiếu · 2A202602630 | Product/BA + spec | Canvas, spec §1–§2, câu hỏi khảo sát, chốt lát cắt |
+| Đỗ Việt Hoàng · 2A202602882 | AI/backend | Prompt, chọn điểm từ data đã xác minh, lời gọi AI thật |
+| Kiều Đình Đoàn · 2A202602936 | frontend/prototype | UI luồng tìm nước, mock/prototype bấm được (CP2) |
+| **Đoàn Quang Thắng** · 2A202602395 | test + data + slide/demo + docs + form (Đội trưởng) | Nhật ký evidence, eval, slide/demo, docs, nộp form CP1–CP5 |
 
 ---
 

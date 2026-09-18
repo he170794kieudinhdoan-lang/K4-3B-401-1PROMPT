@@ -1,4 +1,4 @@
-# AI SPEC — Tìm điểm nước/refill gần nhất tại VinUni · Nhóm E402-C2 · Zone C2
+# AI SPEC — Vmap — Tìm điểm nước/refill gần nhất tại VinUni · Nhóm 1PROMPT · Lớp 3B · Cụm C2 · Phòng E402
 
 Hướng: [x] E — Làn mở (Open Lane)  [ ] A — VLearn  [ ] B — Trợ lý Học viên  [ ] C — Lesson Studio  [ ] D — Học tập thích ứng
 

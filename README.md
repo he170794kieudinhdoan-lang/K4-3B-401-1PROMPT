@@ -4,7 +4,7 @@
 
 ## 👥 Thành viên nhóm & Phân công vai trò
 
-**Lớp:** 3B · **Phòng:** E402 · **Cụm:** C2 · **Track:** 5 (E · Làn mở)
+**Nhóm:** 1PROMPT · **Đề tài:** Vmap · **Lớp:** 3B · **Phòng:** E402 · **Cụm:** C2 · **Track:** 5 (E · Làn mở)
 
 | Họ và Tên | Mã Học Viên | Vai trò chính | Phần việc đảm nhiệm trong dự án |
 |---|---|---|---|
