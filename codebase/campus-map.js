@@ -12,7 +12,7 @@
     if(nav && nav.data){nodes=nav.nodes;edges=nav.data.edges.map(e=>[e.from,e.to]);global.CampusMap.nodes=nodes;global.CampusMap.edges=edges;}
   }
 
-  var starts = ['west_gate', 'south_gate', 'square', 'c_walk', 'e_entrance'];
+  var starts = ['west_gate', 'south_gate', 'north_gate', 'west_park', 'campus_core', 'square', 'c_walk', 'e_entrance', 'east_plaza', 'lakeside'];
   var destination = 'water';
 
   function esc(value) {
@@ -157,12 +157,14 @@
   }
 
   function renderNodes(floor, position) {
+    var nav=global.VmapNavigation;
+    var waterNodes = new Set((nav && nav.data ? nav.data.waterPoints : []).map(function(w){return w.nodeId;}));
     var s = '';
     Object.keys(nodes).forEach(function (id) {
       var n = nodes[id];
-      if (n.floor !== floor || (floor === 'campus' && !starts.includes(id) && !['d_entrance','water_d','water_square'].includes(id))) return;
+      if (n.floor !== floor || (floor === 'campus' && !starts.includes(id) && !waterNodes.has(id) && id !== 'd_entrance')) return;
       var isCurrent = false;
-      var isWater = ['water','water_d','water_square'].includes(id);
+      var isWater = waterNodes.has(id);
       var cls = 'campus-node' + (isCurrent ? ' node-current' : '') + (isWater ? ' node-water' : '');
 
       s += '<g class="' + cls + '" data-node="' + esc(id) + '" tabindex="0" role="button" aria-label="' + esc(n.label) + '">';

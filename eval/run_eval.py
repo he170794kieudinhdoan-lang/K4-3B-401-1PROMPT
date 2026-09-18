@@ -9,7 +9,7 @@ from backend.routing import load_data, plan_trip
 
 
 def evaluate():
-    suite=json.loads((Path(__file__).parent/'cases.json').read_text())
+    suite=json.loads((Path(__file__).parent/'cases.json').read_text(encoding='utf-8'))
     os.environ['VMAP_AGENT_MODE']='mock'
     results=[]
     for case in suite['cases']:

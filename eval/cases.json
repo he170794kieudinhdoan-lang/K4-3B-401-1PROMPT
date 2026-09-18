@@ -20,7 +20,7 @@
     {"id":"C16","message":"Máy nước hỏng","routeFixture":true,"expected":"clarify"},
     {"id":"C17","message":"Máy nước hỏng","expected":"clarify"},
     {"id":"C18","message":"Tìm nước","context":{"excludedPointIds":["water_d"]},"expected":"ok","point":"water_square"},
-    {"id":"C19","message":"Tìm nước","context":{"excludedPointIds":["water","water_d","water_square"]},"expected":"no_available"},
+    {"id":"C19","message":"Tìm nước","context":{"excludedPointIds":["water","water_d","water_square","water_north","water_core","water_east","water_lake"]},"expected":"no_available"},
     {"id":"C20","message":"Dẫn tới tòa K","expected":"no_grounding"},
     {"id":"C21","message":"Tìm nước","context":{"position":{"kind":"node","nodeId":"fake"}},"expected":"error"},
     {"id":"C22","message":"Tìm đồ ăn","expected":"out_of_scope"},
@@ -35,7 +35,7 @@
     {"id":"E07","message":"Tới tòa D, chỉ đi lối mái che","context":{"position":{"kind":"edge","edgeId":"plaza_east__lake_walk","offset":0.5}},"expected":"no_route_under_constraints"},
     {"id":"E08","message":"Trời mưa, tới tòa D","expected":"ok","preference":"prefer_sheltered","covered":true},
     {"id":"E09","message":"Tôi khát, lát học tòa D","expected":"ok","point":"water_d","destination":"d_entrance"},
-    {"id":"E10","message":"Tôi khát, lát học tòa D","context":{"excludedPointIds":["water","water_d","water_square"]},"expected":"no_available"},
+    {"id":"E10","message":"Tôi khát, lát học tòa D","context":{"excludedPointIds":["water","water_d","water_square","water_north","water_core","water_east","water_lake"]},"expected":"no_available"},
     {"id":"E11","message":"Tới tòa D","context":{"weatherContext":{"condition":"unknown","sourceType":"simulated"}},"expected":"ok","weather":"unknown"},
     {"id":"E12","message":"Trời mưa, 10 phút nữa học tòa D","context":{"weatherContext":{"condition":"dry","sourceType":"simulated"}},"expected":"ok","weather":"rain","arrival":"unknown"}
   ]

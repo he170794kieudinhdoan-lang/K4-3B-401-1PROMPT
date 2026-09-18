@@ -134,6 +134,42 @@ def test_live_parser_with_fake_transport(monkeypatch):
     assert result['status']=='ok' and result['providerMode']=='live'
 
 
+def test_live_tool_calling_loop(monkeypatch):
+    import httpx
+    monkeypatch.setenv('VMAP_AGENT_MODE','live')
+    monkeypatch.setenv('VMAP_MODEL','fixture')
+    monkeypatch.setenv('VMAP_MODEL_BASE_URL','https://example.invalid/v1')
+    calls={'n':0}
+    def fake(url, **kwargs):
+        calls['n']+=1
+        if 'tools' not in kwargs.get('json',{}):
+            raise AssertionError('tools missing from request')
+        if calls['n']==1:
+            return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':None,
+                'tool_calls':[{'id':'call_1','type':'function','function':{'name':'resolve_location','arguments':'{"locationMention":"cổng Tây"}'}}]}}]})
+        return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':'{"intent":"find_water"}'}}]})
+    monkeypatch.setattr(httpx,'post',fake)
+    result=run_agent(request('Tôi ở cổng Tây'))
+    assert calls['n']==2
+    assert result['status']=='ok'
+    labels=[t['tool'] for t in result['trace']]
+    assert 'resolve_location' in labels and 'parse_intent' in labels
+
+
+def test_tool_calling_disabled(monkeypatch):
+    import httpx
+    monkeypatch.setenv('VMAP_AGENT_MODE','live')
+    monkeypatch.setenv('VMAP_MODEL','fixture')
+    monkeypatch.setenv('VMAP_MODEL_BASE_URL','https://example.invalid/v1')
+    monkeypatch.setenv('VMAP_TOOL_CALLING','off')
+    def fake(url, **kwargs):
+        assert 'tools' not in kwargs.get('json',{})
+        return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':'{"intent":"find_water"}'}}]})
+    monkeypatch.setattr(httpx,'post',fake)
+    result=run_agent(request())
+    assert result['status']=='ok'
+
+
 def test_http():
     client=TestClient(app)
     assert client.get('/api/health').json()['agentFramework']=='langgraph'

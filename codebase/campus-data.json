@@ -1,5 +1,5 @@
 {
-  "dataVersion": "campus-demo-v2",
+  "dataVersion": "campus-demo-v3",
   "provenance": "simulated",
   "description": "Sơ đồ và trạng thái mẫu, chưa xác minh thực địa. Chi phí là đơn vị hình học mô phỏng, không phải mét.",
   "nodes": [
@@ -267,6 +267,105 @@
       "buildingId": null,
       "aliases": [
         "nước quảng trường"
+      ]
+    },
+    {
+      "id": "north_gate",
+      "x": 500,
+      "y": 120,
+      "floor": "campus",
+      "label": "Cổng phía Bắc",
+      "aliases": [
+        "Cổng phía Bắc"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "west_park",
+      "x": 180,
+      "y": 300,
+      "floor": "campus",
+      "label": "Công viên phía Tây",
+      "aliases": [
+        "Công viên phía Tây"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "campus_core",
+      "x": 430,
+      "y": 350,
+      "floor": "campus",
+      "label": "Ngã tư khuôn viên",
+      "aliases": [
+        "Ngã tư khuôn viên"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "east_plaza",
+      "x": 950,
+      "y": 380,
+      "floor": "campus",
+      "label": "Quảng trường phía Đông",
+      "aliases": [
+        "Quảng trường phía Đông"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "lakeside",
+      "x": 500,
+      "y": 790,
+      "floor": "campus",
+      "label": "Bờ hồ phía Tây",
+      "aliases": [
+        "Bờ hồ phía Tây"
+      ],
+      "buildingId": null
+    },
+    {
+      "id": "water_north",
+      "x": 560,
+      "y": 160,
+      "floor": "campus",
+      "label": "Máy nước Cổng Bắc",
+      "buildingId": null,
+      "aliases": [
+        "nước cổng bắc"
+      ]
+    },
+    {
+      "id": "water_core",
+      "x": 470,
+      "y": 370,
+      "floor": "campus",
+      "label": "Máy nước Ngã tư khuôn viên",
+      "buildingId": null,
+      "aliases": [
+        "nước ngã tư"
+      ]
+    },
+    {
+      "id": "water_east",
+      "x": 905,
+      "y": 420,
+      "floor": "campus",
+      "label": "Máy nước Quảng trường Đông",
+      "buildingId": null,
+      "aliases": [
+        "nước quảng trường đông"
+      ]
+    },
+    {
+      "id": "water_lake",
+      "x": 520,
+      "y": 760,
+      "floor": "campus",
+      "label": "Máy nước Bờ hồ",
+      "buildingId": null,
+      "aliases": [
+        "nước bờ hồ"
       ]
     }
   ],
@@ -1002,6 +1101,390 @@
       "durationSeconds": null,
       "source": "simulated",
       "verifiedAt": null
+    },
+    {
+      "id": "west_gate__west_park",
+      "from": "west_gate",
+      "to": "west_park",
+      "geometry": [
+        [
+          94,
+          500
+        ],
+        [
+          180,
+          300
+        ]
+      ],
+      "cost": 217.70622407367096,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "west_park__h_walk",
+      "from": "west_park",
+      "to": "h_walk",
+      "geometry": [
+        [
+          180,
+          300
+        ],
+        [
+          335,
+          370
+        ]
+      ],
+      "cost": 170.07351352443248,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "west_park__north_gate",
+      "from": "west_park",
+      "to": "north_gate",
+      "geometry": [
+        [
+          180,
+          300
+        ],
+        [
+          500,
+          120
+        ]
+      ],
+      "cost": 367.1511950050127,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "north_gate__water_north",
+      "from": "north_gate",
+      "to": "water_north",
+      "geometry": [
+        [
+          500,
+          120
+        ],
+        [
+          560,
+          160
+        ]
+      ],
+      "cost": 72.11102550927978,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "north_gate__stadium_walk",
+      "from": "north_gate",
+      "to": "stadium_walk",
+      "geometry": [
+        [
+          500,
+          120
+        ],
+        [
+          616,
+          356
+        ]
+      ],
+      "cost": 262.9676786226556,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "north_gate__campus_core",
+      "from": "north_gate",
+      "to": "campus_core",
+      "geometry": [
+        [
+          500,
+          120
+        ],
+        [
+          430,
+          350
+        ]
+      ],
+      "cost": 240.41630560387224,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "campus_core__h_walk",
+      "from": "campus_core",
+      "to": "h_walk",
+      "geometry": [
+        [
+          430,
+          350
+        ],
+        [
+          335,
+          370
+        ]
+      ],
+      "cost": 97.0824391948839,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "campus_core__g_walk",
+      "from": "campus_core",
+      "to": "g_walk",
+      "geometry": [
+        [
+          430,
+          350
+        ],
+        [
+          575,
+          445
+        ]
+      ],
+      "cost": 173.3493582343637,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "campus_core__water_core",
+      "from": "campus_core",
+      "to": "water_core",
+      "geometry": [
+        [
+          430,
+          350
+        ],
+        [
+          470,
+          370
+        ]
+      ],
+      "cost": 44.721359549995796,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "campus_core__plaza_east",
+      "from": "campus_core",
+      "to": "plaza_east",
+      "geometry": [
+        [
+          430,
+          350
+        ],
+        [
+          590,
+          520
+        ]
+      ],
+      "cost": 233.45235060778576,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "east_plaza__sports_walk",
+      "from": "east_plaza",
+      "to": "sports_walk",
+      "geometry": [
+        [
+          950,
+          380
+        ],
+        [
+          790,
+          430
+        ]
+      ],
+      "cost": 167.63054613597802,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "east_plaza__dorm_walk",
+      "from": "east_plaza",
+      "to": "dorm_walk",
+      "geometry": [
+        [
+          950,
+          380
+        ],
+        [
+          940,
+          560
+        ]
+      ],
+      "cost": 180.27756377319943,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "east_plaza__water_east",
+      "from": "east_plaza",
+      "to": "water_east",
+      "geometry": [
+        [
+          950,
+          380
+        ],
+        [
+          905,
+          420
+        ]
+      ],
+      "cost": 60.2079728943417,
+      "environment": "covered_outdoor",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "lakeside__f_walk",
+      "from": "lakeside",
+      "to": "f_walk",
+      "geometry": [
+        [
+          500,
+          790
+        ],
+        [
+          486,
+          665
+        ]
+      ],
+      "cost": 125.78155668005192,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "lakeside__lake_walk",
+      "from": "lakeside",
+      "to": "lake_walk",
+      "geometry": [
+        [
+          500,
+          790
+        ],
+        [
+          580,
+          735
+        ]
+      ],
+      "cost": 97.0824391948839,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "lakeside__water_lake",
+      "from": "lakeside",
+      "to": "water_lake",
+      "geometry": [
+        [
+          500,
+          790
+        ],
+        [
+          520,
+          760
+        ]
+      ],
+      "cost": 36.05551275463989,
+      "environment": "exposed",
+      "transition": null,
+      "bidirectional": true,
+      "accessStatus": "open",
+      "distanceMeters": null,
+      "durationSeconds": null,
+      "source": "simulated",
+      "verifiedAt": null
     }
   ],
   "waterPoints": [
@@ -1027,6 +1510,42 @@
       "id": "water_square",
       "nodeId": "water_square",
       "label": "Điểm nước quảng trường · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_north",
+      "nodeId": "water_north",
+      "label": "Máy nước cổng Bắc · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_core",
+      "nodeId": "water_core",
+      "label": "Máy nước ngã tư khuôn viên · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_east",
+      "nodeId": "water_east",
+      "label": "Máy nước quảng trường Đông · mẫu",
+      "status": "active",
+      "source": "simulated",
+      "provenance": "simulated",
+      "verifiedAt": null
+    },
+    {
+      "id": "water_lake",
+      "nodeId": "water_lake",
+      "label": "Máy nước bờ hồ · mẫu",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
