@@ -18,7 +18,23 @@ Khi cần lấy/refill nước tại VinUni, học viên AI20k đôi khi không 
 
 ## 3 · Bằng chứng đầu (1–2 con số + quote)
 
-Nhóm đang khảo sát học viên AI20k qua form/phỏng vấn nhanh và quan sát thực địa các điểm nước tại VinUni để ghi nhận vị trí, tình trạng, cách người học đang tự tìm nước và thời gian họ mất.
+**Nguồn:** Google Form + phỏng vấn nhanh học viên AI20k (17–18/9). Log CSV nguyên văn: [`evidence/Khảo_sát_trải_nghiệm_tìm_khu_vự2026-09-18_06_44_07.csv`](evidence/Kh%E1%BA%A3o_s%C3%A1t_tr%E1%BA%A3i_nghi%E1%BB%87m_t%C3%ACm_khu_v%E1%BB%B12026-09-18_06_44_07.csv) — **n = 21** phiếu hợp lệ (đạt chuẩn A ≥ 20).
+
+**Con số chính:**
+- **17/21 (81%)** học viên AI20k từng cần tìm nơi lấy/refill nước nhưng không biết ở đâu.
+- **18/21 (86%)** hiện chỉ biết **0–2 điểm nước** quanh khu vực học thường xuyên.
+- **5/17 (29%) confirmed pain** mất **trên 5 phút** mỗi lần tìm; **14/21 (67%)** muốn thông tin "điểm nước gần nhất".
+
+**Quote nguyên văn từ CSV** (số trong ngoặc = số phiếu ghi đúng cụm này):
+
+- *"Không biết điểm nước nằm ở đâu"* (×10)
+- *"Thiếu / khó thấy biển chỉ dẫn"* (×6)
+- *"Campus rộng, khó định hướng"* (×5)
+- *"Không biết điểm nào gần nhất"* (×4)
+- *"Không biết điểm nước có đang sử dụng được không"* (×2)
+- *"Cần có bản đồ rõ ràng hơn"* — quote mở về mong muốn cải thiện.
+
+Chi tiết bảng phân bố 6 chiều + willing users để trong `spec.md` §1.
 
 ## 4 · Lát cắt MỘT CÂU (1 user · 1 việc · 1 quyết định AI · 1 kết quả)
 
