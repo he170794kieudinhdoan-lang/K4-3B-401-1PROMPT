@@ -1492,6 +1492,7 @@
       "id": "water",
       "nodeId": "water",
       "label": "Máy nước E · Tầng 2",
+      "description": "Trong nhà tòa E · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1501,6 +1502,7 @@
       "id": "water_d",
       "nodeId": "water_d",
       "label": "Điểm nước gần D · mẫu",
+      "description": "Gần cửa tòa D · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1510,6 +1512,7 @@
       "id": "water_square",
       "nodeId": "water_square",
       "label": "Điểm nước quảng trường · mẫu",
+      "description": "Quảng trường trung tâm · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1519,6 +1522,7 @@
       "id": "water_north",
       "nodeId": "water_north",
       "label": "Máy nước cổng Bắc · mẫu",
+      "description": "Gần cổng Bắc · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1528,6 +1532,7 @@
       "id": "water_core",
       "nodeId": "water_core",
       "label": "Máy nước ngã tư khuôn viên · mẫu",
+      "description": "Ngã tư khuôn viên · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1537,6 +1542,7 @@
       "id": "water_east",
       "nodeId": "water_east",
       "label": "Máy nước quảng trường Đông · mẫu",
+      "description": "Quảng trường Đông · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1546,6 +1552,7 @@
       "id": "water_lake",
       "nodeId": "water_lake",
       "label": "Máy nước bờ hồ · mẫu",
+      "description": "Bờ hồ · uống & refill · đang hoạt động (mẫu)",
       "status": "active",
       "source": "simulated",
       "provenance": "simulated",
@@ -1556,26 +1563,44 @@
     {
       "id": "D",
       "label": "Tòa D",
-      "aliases": [
-        "D",
-        "tòa D",
-        "D Building"
-      ],
-      "entranceNodeIds": [
-        "d_entrance"
-      ]
+      "aliases": ["D", "tòa D", "D Building"],
+      "entranceNodeIds": ["d_entrance"]
     },
     {
       "id": "E",
       "label": "Tòa E",
-      "aliases": [
-        "E",
-        "tòa E",
-        "E Building"
-      ],
-      "entranceNodeIds": [
-        "e_entrance"
-      ]
+      "aliases": ["E", "tòa E", "E Building"],
+      "entranceNodeIds": ["e_entrance"]
+    },
+    {
+      "id": "A",
+      "label": "Tòa A",
+      "aliases": ["A", "tòa A", "A Building"],
+      "entranceNodeIds": ["a_walk"]
+    },
+    {
+      "id": "C",
+      "label": "Tòa C",
+      "aliases": ["C", "tòa C", "C Building"],
+      "entranceNodeIds": ["c_walk"]
+    },
+    {
+      "id": "G",
+      "label": "Tòa G",
+      "aliases": ["G", "tòa G", "G Building"],
+      "entranceNodeIds": ["g_walk"]
+    },
+    {
+      "id": "H",
+      "label": "Tòa H",
+      "aliases": ["H", "tòa H", "H Building"],
+      "entranceNodeIds": ["h_walk"]
+    },
+    {
+      "id": "I",
+      "label": "Tòa I",
+      "aliases": ["I", "tòa I", "I Building"],
+      "entranceNodeIds": ["i_walk"]
     }
   ]
 }

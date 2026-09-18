@@ -272,7 +272,7 @@
     var styles = '<style><![CDATA[' +
       '.route-traveled{fill:none;stroke:#94a3b8;stroke-width:7;stroke-linecap:round;}' +
       '.graph-road{fill:none;stroke-width:13;stroke-linecap:round;stroke-linejoin:round}.road-indoor{stroke:#a7f3d0}.road-covered_outdoor{stroke:#99d5e5}.road-exposed{stroke:#fff;stroke-dasharray:12 5}.road-unknown{stroke:#fcd34d;stroke-dasharray:5 5}' +
-      '.campus-ground { fill: #f3f6f0; }' +
+      '.campus-ground { fill: #d8f08a; }' +
       '.river { fill: #c2e7ff; }' +
       '.river-highlight { fill: none; stroke: #e0f2fe; stroke-width: 14; opacity: 0.6; }' +
       '.outer-road { fill: none; stroke: #ffffff; stroke-width: 28; stroke-linecap: round; stroke-linejoin: round; filter: url(#road-shadow); }' +
@@ -282,7 +282,7 @@
       '.campus-detail { fill: #e5ede0; stroke: #d6e2d0; stroke-width: 1.5; }' +
       '.building { cursor: pointer; filter: url(#b-shadow); transition: transform 0.15s; }' +
       '.building:hover { filter: url(#b-shadow-hover); }' +
-      '.building rect, .building ellipse { fill: #ffffff; stroke: #d1d5db; stroke-width: 1.5; }' +
+      '.building rect, .building ellipse { fill: #fffbe6; stroke: #111111; stroke-width: 3; }' +
       '.building-focus rect { fill: #ecfdf5; stroke: #10b981; stroke-width: 3; }' +
       '.focus-badge { fill: #10b981; filter: drop-shadow(0 2px 4px rgba(16,185,129,0.3)); }' +
       '.focus-badge-text { fill: #ffffff; font-size: 13px; font-weight: 700; text-anchor: middle; font-family: system-ui, -apple-system, sans-serif; }' +

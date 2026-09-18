@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-label="Vmap">
+  <title>Vmap</title>
+  <rect x="2" y="2" width="60" height="60" fill="#b8ff3c" stroke="#111" stroke-width="4"/>
+  <path d="M32 10c-9.2 0-16 7.4-16 17.2 0 12.2 16 26.8 16 26.8s16-14.6 16-26.8C48 17.4 41.2 10 32 10z" fill="#111"/>
+  <circle cx="32" cy="26.5" r="9" fill="#7df9ff"/>
+  <path d="M32 20.2c-.2 3.4-2.6 5.6-2.6 8.2a2.6 2.6 0 1 0 5.2 0c0-2.6-2.4-4.8-2.6-8.2z" fill="#111"/>
+</svg>

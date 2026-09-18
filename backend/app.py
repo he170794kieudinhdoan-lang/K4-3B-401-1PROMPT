@@ -14,6 +14,12 @@ from pydantic import BaseModel, ConfigDict, Field
 from .agent import run_agent
 
 
+class HistoryItem(BaseModel):
+    model_config=ConfigDict(extra='forbid')
+    role: Literal['user','assistant']
+    text: str=Field(min_length=1,max_length=400)
+
+
 class RequestBody(BaseModel):
     model_config=ConfigDict(extra='forbid')
     requestId: str=Field(min_length=1,max_length=100)
@@ -22,6 +28,7 @@ class RequestBody(BaseModel):
     positionRevision: int=Field(default=0,ge=0)
     context: dict=Field(default_factory=dict)
     action: dict | None=None
+    history: list[HistoryItem]=Field(default_factory=list,max_length=8)
     schemaVersion: Literal[2]=2
 
 
