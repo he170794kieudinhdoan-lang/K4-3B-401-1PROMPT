@@ -2,6 +2,7 @@
 import json
 import os
 import re
+import sys
 import time
 import unicodedata
 from typing import Literal, TypedDict
@@ -70,6 +71,7 @@ def resolve(data, mention, destination=False):
 
 
 TOOL_LOOP_MAX = 4
+JSON_FORCE_RETRIES = 2
 TOOL_SPECS = [
     {'type':'function','function':{'name':'resolve_location','description':'Xác định mốc/vị trí hiện tại người dùng nói tới thành các nodeId có thật trong dữ liệu. Không bao giờ tự tạo ID.','parameters':{'type':'object','properties':{'locationMention':{'type':'string','description':'Đoạn nhắc vị trí hiện tại, ví dụ "cổng Tây", "cửa E"'}},'required':['locationMention'],'additionalProperties':False}}},
     {'type':'function','function':{'name':'resolve_destination','description':'Xác định cửa/tòa nhà đích người dùng nói tới thành các nodeId có thật trong dữ liệu. Không bao giờ tự tạo ID.','parameters':{'type':'object','properties':{'destinationMention':{'type':'string','description':'Đoạn nhắc điểm đến, ví dụ "tòa D", "tòa K"'}},'required':['destinationMention'],'additionalProperties':False}}},
@@ -111,7 +113,7 @@ def tool_resolve_destination(state, args):
 
 def tool_get_weather_context(state, args):
     weather = _ctx(state).get('weatherContext') or {'condition':'unknown','sourceType':'simulated'}
-    return {'condition': weather.get('condition'), 'sourceType': weather.get('sourceType', 'simulated')}
+    return {'condition': weather.get('condition'), 'sourceType': weather.get('sourceType', 'simulated'), 'source': weather.get('source', 'Chưa có dữ liệu thời tiết')}
 
 
 def tool_report_unavailable(state, args):
@@ -153,6 +155,27 @@ def mock_parse(message, data):
 def base_response(req, mode):
     return dict(requestId=req['requestId'], contextVersion=req['contextVersion'],positionRevision=req.get('positionRevision',0),
                 status='ok',message='',actions=[],route=None,evidence=[],traceId=uuid4().hex,error=None,contextPatch={},providerMode=mode)
+
+
+def _tool_signature(calls):
+    sig=[]
+    for tc in calls:
+        try:
+            args=json.loads(tc['function'].get('arguments') or '{}')
+        except ValueError:
+            args=tc['function'].get('arguments') or ''
+        sig.append((tc['function']['name'], json.dumps(args, sort_keys=True, ensure_ascii=False)))
+    return sorted(sig)
+
+
+def _last_tool_signature(messages):
+    for m in reversed(messages or []):
+        if m.get('role') == 'assistant' and m.get('tool_calls'):
+            try:
+                return _tool_signature(m['tool_calls'])
+            except (KeyError, TypeError):
+                return None
+    return None
 
 
 def parse_intent_content(content):
@@ -203,6 +226,7 @@ def parse_node(state):
     if os.getenv('VMAP_MODEL_API_KEY'):
         headers['Authorization'] = 'Bearer '+os.environ['VMAP_MODEL_API_KEY']
     forced_json = False
+    json_retries = 0
     while True:
         body = {'model':os.environ['VMAP_MODEL'],'temperature':0,'max_tokens':2000,
                 'response_format':{'type':'json_object'},'messages':messages}
@@ -233,6 +257,11 @@ def parse_node(state):
         if tool_calls and iterations < TOOL_LOOP_MAX and not forced_json:
             try:
                 calls = [tc for tc in tool_calls if tc.get('id') and tc.get('function',{}).get('name')]
+                if calls and _tool_signature(calls) == _last_tool_signature(messages):
+                    forced_json = True
+                    trace = trace + [{'tool':'tool_loop_repeat','arguments':{'limit':TOOL_LOOP_MAX},'result':{'forced_json':True,'repeated':True}}]
+                    messages = messages + [{'role':'user','content':'Bạn vừa gọi lại đúng tool với đúng tham số như lượt trước; kết quả không thay đổi. Dừng gọi tool và xuất MỘT JSON duy nhất theo đúng schema.'}]
+                    continue
                 normalized = [{'id':tc['id'],'function':{'name':tc['function']['name'],'arguments':tc['function'].get('arguments') or '{}'}} for tc in calls]
                 echoed = []
                 for tc in calls:
@@ -245,13 +274,22 @@ def parse_node(state):
             except (KeyError,TypeError):
                 tool_calls = []
         if forced_json:
-            if tool_calls:
-                break
             parsed = parse_intent_content(message.get('content') or '')
-            if parsed is not None:
-                trace = trace + [{'tool':'parse_intent','arguments':{},'result':{'intent':parsed['intent'],'providerMode':'live'}}]
-                return {'mode':mode,'response':response,'parsed':parsed,'llm_messages':[],'pending_tool_calls':[],'iterations':0,'trace':trace}
-            break
+            if tool_calls or parsed is None:
+                if time.monotonic()-state['started'] >= budget or json_retries >= JSON_FORCE_RETRIES:
+                    break
+                json_retries += 1
+                stripped = []
+                for m in messages:
+                    mm = dict(m)
+                    if mm.get('role') == 'assistant' and mm.get('tool_calls'):
+                        mm['content'] = mm.get('content') or 'Đã thu thập xong thông tin tool.'
+                        mm.pop('tool_calls', None)
+                    stripped.append(mm)
+                messages = stripped + [{'role':'user','content':'Chỉ xuất MỘT JSON duy nhất theo đúng schema, không gọi tool, không giải thích.'}]
+                continue
+            trace = trace + [{'tool':'parse_intent','arguments':{},'result':{'intent':parsed['intent'],'providerMode':'live'}}]
+            return {'mode':mode,'response':response,'parsed':parsed,'llm_messages':[],'pending_tool_calls':[],'iterations':0,'trace':trace}
         if tool_calls:
             forced_json = True
             trace = trace + [{'tool':'parse_loop_limit','arguments':{'limit':TOOL_LOOP_MAX},'result':{'forced_json':True}}]
@@ -501,7 +539,7 @@ def response_node(state):
     try:
         line=json.dumps({'requestId':req['requestId'],'message':req['message'],'status':r['status'],
                          'route':(r.get('route') or {}).get('destinationId') if isinstance(r.get('route'),dict) else r.get('route'),
-                         'trace':[t['tool'] for t in r.get('trace',[])],'elapsedMs':r['elapsedMs'],
+                         'trace':r.get('trace',[]),'elapsedMs':r['elapsedMs'],
                          'error':r.get('error'),'response':r['message']}, ensure_ascii=False)
         if hasattr(sys.stdout,'buffer'):
             sys.stdout.buffer.write((line+'\n').encode('utf-8')); sys.stdout.buffer.flush()
