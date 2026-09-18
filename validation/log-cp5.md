@@ -10,11 +10,11 @@
 
 | # | User (tên · MSSV/handle) | Từ CP1? | Task giao | Kẹt ở đâu (quan sát) | Quote nguyên văn | Quyết định (fix / giữ / để dành) |
 |---|---|---|---|---|---|---|
-| 1 | Đỗ Nguyễn Ngọc Long · 2A202602390 | ✅ có | Tìm nước từ cổng Tây | [ví dụ: rê chuột 40s ở nút mic, không bấm] | *"UI hay đấy nhưng tao nghĩ thêm dòng mô tả (description)" | fix — 1 dòng mô tả |
+| 1 | Đỗ Nguyễn Ngọc Long · 2A202602390 | ✅ có | Tìm nước từ cổng Tây | không | *"UI hay đấy nhưng tao nghĩ thêm dòng mô tả (description)" | fix — thêm 1 dòng mô tả |
 | 2 | Tạ Quang Dũng · 2A202602588 | ❌ | Tìm điểm nước ở gần vị trí của bạn hiện tại | thiếu thông tin | *"Toà G trên web đéo có điểm nước à, tao đang ở toà G vẫn thấy có mà"* | fix - Đi quoanh toà G rồi cập nhật thêm các điểm nước |
-| 3 | Nguyễn Tuấn Thành · 2A202602640 | ❌ | hỏi chatbot "Tôi là 3 que, tôi khát nước, tìm tôi đi nước gần nhất"  | không nhận được thông tin mong muốn | *"AI chatbot ngu vkl"* | giữ - do không có tiền mua model mạnh hơn |
+| 3 | Nguyễn Tuấn Thành · 2A202602640 | ❌ | hỏi chatbot "Tôi là 3 que, tôi khát nước, tìm tôi điểm lấy nước gần nhất"  | không nhận được thông tin mong muốn | *"AI chatbot ngu vkl"* | giữ - do không có tiền mua model mạnh hơn |
 | 4 | Nguyễn Hoàng Nam · 2A202602485 | ✅ | Tìm điểm nước ở gần vị trí của bạn hiện tại | không có tính năng định vị | *"không cho người dùng pick điểm hiện tại theo gps à"* | để dành - mới chỉ demo, chưa có thời gian thêm tính năng đó |
-| 5 | **[CẦN TEST THÊM 1 NGƯỜI — rubric yêu cầu ≥ 5]** | ? | ? | ? | *"..."* | ? |
+| 5 | Trương Thị Lan Anh · 2A202602451 | ❌ | Tìm điểm nước ở gần vị trí của bạn hiện tại | không | *"Tao thấy tao tự đứng dậy đi lại ngó xem điểm nước ở đâu còn nhanh hơn việc lên web tra"* | giữ - vì sẽ hữu ích cho người mới đến trường học chưa quen các vị trí và có những chỗ lấy nước nó ở trong phòng gì đó chứ không ở ngoài hành lang nên khó thấy |
 
 **Ràng buộc rubric:**
 - ≥ 5 dòng → **hiện 4/5 hợp lệ + 1 đang thiếu**. Ưu tiên mời `discord_user_123` hoặc `ai_learner_99` (từ CSV Form) trước 22:30 · 18/9.
