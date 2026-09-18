@@ -170,6 +170,49 @@ def test_tool_calling_disabled(monkeypatch):
     assert result['status']=='ok'
 
 
+def test_tool_loop_repeat_resolves(monkeypatch):
+    import httpx
+    monkeypatch.setenv('VMAP_AGENT_MODE','live')
+    monkeypatch.setenv('VMAP_MODEL','fixture')
+    monkeypatch.setenv('VMAP_MODEL_BASE_URL','https://example.invalid/v1')
+    calls={'n':0}
+    def fake(url, **kwargs):
+        calls['n']+=1
+        if calls['n']<=2:
+            assert 'tools' in kwargs.get('json',{})
+        tool_call={'id':'call_'+str(calls['n']),'type':'function','function':{'name':'get_weather_context','arguments':'{}'}}
+        if calls['n'] in (1,2):
+            return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':None,'tool_calls':[tool_call]}}]})
+        return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':'{"intent":"find_water"}'}}]})
+    monkeypatch.setattr(httpx,'post',fake)
+    result=run_agent(request())
+    assert result['status']=='ok'
+    executed=[t for t in result['trace'] if t['tool']=='get_weather_context' and t['result'].get('ok')]
+    assert len(executed)==1
+    assert 'tool_loop_repeat' in [t['tool'] for t in result['trace']]
+    assert calls['n']==3
+
+
+def test_forced_json_tool_echo_retries(monkeypatch):
+    import httpx
+    monkeypatch.setenv('VMAP_AGENT_MODE','live')
+    monkeypatch.setenv('VMAP_MODEL','fixture')
+    monkeypatch.setenv('VMAP_MODEL_BASE_URL','https://example.invalid/v1')
+    calls={'n':0}
+    def fake(url, **kwargs):
+        calls['n']+=1
+        if calls['n']<=2:
+            assert 'tools' in kwargs.get('json',{})
+        tool_call={'id':'call_'+str(calls['n']),'type':'function','function':{'name':'get_weather_context','arguments':'{}'}}
+        if calls['n'] in (1,2,3):
+            return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':None,'tool_calls':[tool_call]}}]})
+        return httpx.Response(200,request=httpx.Request('POST',url),json={'choices':[{'message':{'content':'{"intent":"find_water"}'}}]})
+    monkeypatch.setattr(httpx,'post',fake)
+    result=run_agent(request())
+    assert result['status']=='ok'
+    assert calls['n']==4
+
+
 def test_http():
     client=TestClient(app)
     assert client.get('/api/health').json()['agentFramework']=='langgraph'
